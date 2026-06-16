@@ -242,10 +242,11 @@ mark.b { background: var(--blue);   color: var(--cream); padding: 0 4px; }
 .card-blue   { border-left-color: var(--blue); }
 .card-yellow { border-left-color: var(--yellow); }
 .card-dark   { background: rgba(255,247,236,.04); border: .5px solid rgba(255,247,236,.1); }
-.card h3 { font-family:'Times New Roman',serif; font-size:1.05rem; margin-bottom:.5rem; }
+.card h3 { font-family:'Times New Roman',serif; font-size:1.05rem; margin-bottom:.5rem; color:var(--dark); }
 .card p  { font-size:13.5px; line-height:1.7; color:rgba(33,33,33,.68); }
-.card-dark p { color:rgba(255,247,236,.65); }
 .card-dark h3 { color:var(--cream); }
+.card-dark p  { color:rgba(255,247,236,.65); }
+
 
 /* ─── BLOCKQUOTE / HIGHLIGHT ─── */
 .highlight {
@@ -324,23 +325,23 @@ blockquote.testimonial strong { color:var(--yellow); font-style:normal; font-wei
 .faq-a.open { max-height:300px; padding-bottom:1.1rem; }
 
 /* ─── FORM ─── */
-.form-section { background:var(--dark); position:relative; overflow:hidden; }
+.form-section { background:#1a1a1a; position:relative; overflow:hidden; }
 .form-section::before { content:''; position:absolute; inset:0; background-image:url('texturas/1.png'); background-size:cover; opacity:.04; pointer-events:none; }
-.form-header  { padding:2.5rem var(--pad) 1.5rem; border-bottom:.5px solid rgba(255,247,236,.08); max-width:var(--max); margin:0 auto; position:relative; z-index:1; }
-.form-body    { padding:2rem var(--pad) 3rem; max-width:var(--max); margin:0 auto; position:relative; z-index:1; }
-.prog { display:flex; gap:4px; margin-bottom:1.75rem; }
-.prog-dot { height:2px; flex:1; background:rgba(255,247,236,.15); border-radius:1px; transition:background .4s; }
+.form-header  { padding:2.5rem var(--pad) 1.75rem; border-bottom:1px solid rgba(255,247,236,.1); max-width:var(--max); margin:0 auto; position:relative; z-index:1; }
+.form-body    { padding:2.25rem var(--pad) 3rem; max-width:var(--max); margin:0 auto; position:relative; z-index:1; }
+.prog { display:flex; gap:5px; margin-bottom:2rem; }
+.prog-dot { height:3px; flex:1; background:rgba(255,247,236,.18); border-radius:2px; transition:background .4s; }
 .prog-dot.done { background:var(--yellow); }
 .form-step { display:none; }
 .form-step.active { display:block; }
 .form-step-title { font-family:'Times New Roman',serif; font-size:1.3rem; color:var(--cream); margin-bottom:.3rem; }
 .form-step-title em { font-style:italic; color:var(--yellow); }
-.form-desc { font-size:12.5px; color:rgba(255,247,236,.4); margin-bottom:1.5rem; line-height:1.6; }
-.fl { display:block; font-size:10px; letter-spacing:.13em; text-transform:uppercase; color:rgba(255,247,236,.4); margin:1rem 0 5px; }
+.form-desc { font-size:12.5px; color:rgba(255,247,236,.5); margin-bottom:1.75rem; line-height:1.6; padding:.75rem 1rem; background:rgba(255,247,236,.05); border-left:2px solid rgba(255,247,236,.2); }
+.fl { display:block; font-size:10px; letter-spacing:.13em; text-transform:uppercase; color:rgba(255,247,236,.55); margin:1.1rem 0 6px; font-weight:600; }
 .fi, .fta, .fsel {
   width:100%;
-  background:rgba(255,247,236,.05);
-  border:.5px solid rgba(255,247,236,.18);
+  background:rgba(255,247,236,.09);
+  border:1px solid rgba(255,247,236,.32);
   color:var(--cream);
   font-family:'Raleway',sans-serif;
   font-size:16px;
@@ -349,10 +350,11 @@ blockquote.testimonial strong { color:var(--yellow); font-style:normal; font-wei
   border-radius:0;
   -webkit-appearance:none;
   appearance:none;
-  transition:border-color .2s;
+  transition:border-color .2s, background .2s;
 }
-.fi:focus, .fta:focus, .fsel:focus { border-color:var(--yellow); }
-.fi::placeholder, .fta::placeholder { color:rgba(255,247,236,.28); }
+.fi:hover, .fta:hover, .fsel:hover { background:rgba(255,247,236,.13); border-color:rgba(255,247,236,.45); }
+.fi:focus, .fta:focus, .fsel:focus { background:rgba(255,247,236,.12); border-color:var(--yellow); border-width:1.5px; }
+.fi::placeholder, .fta::placeholder { color:rgba(255,247,236,.38); }
 .fta { resize:vertical; min-height:100px; }
 .fsel { cursor:pointer; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='rgba(255,247,236,0.4)' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 14px center; padding-right:36px; }
 .fsel option { background:#2a2a2a; color:var(--cream); }
