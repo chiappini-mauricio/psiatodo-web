@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <meta name="description" content="Contacto — Psi a Todo. Hablemos.">
+  <title>Psi a Todo | Contacto</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600&family=Merriweather:ital,wght@0,400;1,300;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+  <link rel="stylesheet" href="assets/style.css">
+  <style>
+    .contacto-grid { display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:start; }
+    @media(max-width:640px){ .contacto-grid{grid-template-columns:1fr;gap:2.5rem} }
+    .contacto-info-item { display:flex; gap:1rem; align-items:flex-start; margin-bottom:1.5rem; }
+    .contacto-info-icon { font-size:1.4rem; color:var(--red); flex-shrink:0; margin-top:2px; }
+    .contacto-info-label { font-size:10px; letter-spacing:.15em; text-transform:uppercase; color:rgba(33,33,33,.4); margin-bottom:.2rem; }
+    .contacto-info-val { font-size:14px; color:var(--dark); }
+    .contacto-info-val a { color:var(--red); text-decoration:none; }
+    .contacto-info-val a:hover { text-decoration:underline; }
+  </style>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <span class="eyebrow eyebrow-yellow reveal">Estamos disponibles</span>
+    <h1 class="h1 light reveal d1">¿Tenés alguna consulta?<br><em>Hablemos.</em></h1>
+    <img src="assets/manos/10.png" alt="" aria-hidden="true" style="position:absolute;right:0;bottom:0;width:140px;opacity:.25;pointer-events:none;">
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section class="sec sec-cream">
+  <div class="inner">
+    <div class="contacto-grid">
+      <!-- INFO -->
+      <div>
+        <span class="eyebrow eyebrow-dark reveal">Encontranos</span>
+        <h2 class="h2 dark reveal d1" style="margin-bottom:2rem">Datos de <em>contacto.</em></h2>
+
+        <div class="contacto-info-item reveal d1">
+          <div class="contacto-info-icon"><i class="ti ti-mail"></i></div>
+          <div>
+            <p class="contacto-info-label">Email</p>
+            <p class="contacto-info-val"><a href="mailto:info@psiatodo.com">info@psiatodo.com</a></p>
+          </div>
+        </div>
+        <div class="contacto-info-item reveal d2">
+          <div class="contacto-info-icon"><i class="ti ti-brand-whatsapp"></i></div>
+          <div>
+            <p class="contacto-info-label">WhatsApp</p>
+            <p class="contacto-info-val"><a href="https://wa.me/5491140463306" target="_blank">+54 9 11 4046-3306</a></p>
+          </div>
+        </div>
+        <div class="contacto-info-item reveal d3">
+          <div class="contacto-info-icon"><i class="ti ti-brand-instagram"></i></div>
+          <div>
+            <p class="contacto-info-label">Instagram</p>
+            <p class="contacto-info-val"><a href="https://www.instagram.com/psi.a.todo" target="_blank">@psi.a.todo</a></p>
+          </div>
+        </div>
+        <div class="contacto-info-item reveal d4">
+          <div class="contacto-info-icon"><i class="ti ti-map-pin"></i></div>
+          <div>
+            <p class="contacto-info-label">Atención</p>
+            <p class="contacto-info-val">Presencial en CABA y diversas zonas de Argentina<br>Virtual para todo el país y el exterior</p>
+          </div>
+        </div>
+
+        <div class="highlight reveal" style="margin-top:1rem">
+          Si lo que buscás es iniciar terapia, el camino más directo es el <a href="consulta.html" style="color:var(--dark);font-weight:600">formulario de consulta</a>. Este formulario de contacto es para otro tipo de consultas.
+        </div>
+      </div>
+
+      <!-- FORM -->
+      <div class="reveal d2">
+        <label class="fl-light">Nombre *</label>
+        <input class="fi-light" type="text" placeholder="Tu nombre" autocomplete="given-name" required>
+        <label class="fl-light">Apellido *</label>
+        <input class="fi-light" type="text" placeholder="Tu apellido" autocomplete="family-name" required>
+        <label class="fl-light">Email *</label>
+        <input class="fi-light" type="email" placeholder="tu@email.com" autocomplete="email" required>
+        <label class="fl-light">Teléfono</label>
+        <input class="fi-light" type="tel" placeholder="+54 9 11 XXXX XXXX" autocomplete="tel">
+
+        <label class="fl-light">Soy:</label>
+        <div class="radio-group">
+          <label class="radio-opt"><input type="radio" name="tipo" value="consultante"> Consultante</label>
+          <label class="radio-opt"><input type="radio" name="tipo" value="profesional"> Profesional</label>
+          <label class="radio-opt"><input type="radio" name="tipo" value="institucion"> Institución / Organización</label>
+          <label class="radio-opt"><input type="radio" name="tipo" value="medio"> Medio de comunicación</label>
+        </div>
+
+        <label class="fl-light">Mensaje *</label>
+        <textarea class="fta-light" placeholder="¿En qué podemos ayudarte?" style="min-height:110px" required></textarea>
+        <button class="fbtn-light" onclick="submitContacto(this)">Enviar mensaje <i class="ti ti-send"></i></button>
+
+        <div id="contacto-thanks" style="display:none;padding:2rem 0;text-align:center">
+          <div style="font-size:2.5rem;color:var(--red);margin-bottom:.75rem"><i class="ti ti-circle-check"></i></div>
+          <h3 style="font-family:'Times New Roman',serif;margin-bottom:.4rem">¡Gracias por escribirnos!</h3>
+          <p class="body body-muted">Nos pondremos en contacto a la brevedad.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+<script src="assets/nav-footer.js"></script>
+<script src="assets/shared.js"></script>
+<script>
+function submitContacto(btn) {
+  btn.closest('div').querySelectorAll('input,textarea,button,label').forEach(el => el.style.display='none');
+  document.getElementById('contacto-thanks').style.display = 'block';
+}
+</script>
+</body>
+</html>

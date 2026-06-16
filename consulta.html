@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <meta name="description" content="Formulario de consulta — Psi a Todo. El punto de partida de tu proceso terapéutico.">
+  <title>Psi a Todo | Quiero empezar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600&family=Merriweather:ital,wght@0,400;1,300;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+  <link rel="stylesheet" href="assets/style.css">
+  <style>
+    .garantias { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:rgba(255,247,236,.08); margin-top:2rem; }
+    @media(max-width:500px){ .garantias{grid-template-columns:1fr} }
+    .garantia { background:rgba(255,247,236,.04); border:.5px solid rgba(255,247,236,.08); padding:1.25rem; display:flex; gap:.75rem; align-items:flex-start; }
+    .garantia-icon { font-size:1.3rem; color:var(--yellow); flex-shrink:0; margin-top:2px; }
+    .garantia h4 { font-size:.9rem; color:var(--cream); margin-bottom:.25rem; font-weight:600; }
+    .garantia p  { font-size:12.5px; color:rgba(255,247,236,.55); line-height:1.6; }
+  </style>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <span class="eyebrow eyebrow-yellow reveal">Primer paso</span>
+    <h1 class="h1 light reveal d1">Este formulario es el punto de partida<br>de tu proceso <em>terapéutico.</em></h1>
+    <p class="lead body-light reveal d2" style="max-width:480px;margin-top:1rem">
+      La información brindada nos permite evaluar tu situación y encontrar al profesional de nuestra red que mejor pueda acompañarla.
+    </p>
+  </div>
+</section>
+
+<!-- GARANTÍAS -->
+<section class="sec sec-dark sec-texture">
+  <div class="inner">
+    <div class="garantias">
+      <div class="garantia reveal d1">
+        <div class="garantia-icon"><i class="ti ti-currency-dollar-off"></i></div>
+        <div><h4>La orientación no tiene costo</h4><p>El análisis de tu caso y la derivación son parte de lo que hacemos. Solo abonás las sesiones con tu terapeuta, una vez que empezás.</p></div>
+      </div>
+      <div class="garantia reveal d2">
+        <div class="garantia-icon"><i class="ti ti-lock"></i></div>
+        <div><h4>Lo que nos contás es confidencial</h4><p>Tus datos son leídos exclusivamente por el equipo de coordinación clínica. Nada circula por fuera de ese espacio.</p></div>
+      </div>
+      <div class="garantia reveal d3">
+        <div class="garantia-icon"><i class="ti ti-target"></i></div>
+        <div><h4>Trabajamos con un nivel de acierto alto</h4><p>Porque antes de derivarte, leemos en profundidad tu motivo de consulta, tu disponibilidad y tus posibilidades económicas.</p></div>
+      </div>
+      <div class="garantia reveal d4">
+        <div class="garantia-icon"><i class="ti ti-refresh"></i></div>
+        <div><h4>Y si algo no funciona, se revisa</h4><p>Sabemos que el comienzo de un proceso puede requerir ajustes. Si es necesario, buscamos una nueva alternativa.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FORMULARIO MULTI-STEP -->
+<section class="form-section" id="formulario">
+  <div class="form-header reveal">
+    <span class="eyebrow eyebrow-muted">Tu consulta</span>
+    <h2 class="h2 h2 light" style="color:var(--cream)">Contanos <em>qué buscás.</em></h2>
+    <p style="font-size:13.5px;color:rgba(255,247,236,.45);margin-top:.4rem">Presencial o virtual, según lo que necesités. Ambas modalidades están disponibles.</p>
+  </div>
+
+  <div class="form-body">
+    <div class="prog">
+      <div class="prog-dot done" id="pd1"></div>
+      <div class="prog-dot" id="pd2"></div>
+      <div class="prog-dot" id="pd3"></div>
+    </div>
+
+    <!-- PASO 1 -->
+    <div class="form-step active" id="step1">
+      <p class="form-step-title">Paso 1 — <em>Datos básicos</em></p>
+      <p class="form-desc">Los campos marcados con * son obligatorios.</p>
+      <div class="fi-row">
+        <div><label class="fl" for="nombre">Nombre *</label><input class="fi" type="text" id="nombre" placeholder="Tu nombre" autocomplete="given-name" required></div>
+        <div><label class="fl" for="apellido">Apellido *</label><input class="fi" type="text" id="apellido" placeholder="Tu apellido" autocomplete="family-name" required></div>
+      </div>
+      <div class="fi-row" style="margin-top:.75rem">
+        <div><label class="fl" for="edad">Edad *</label><input class="fi" type="number" id="edad" placeholder="Ej: 28" inputmode="numeric" min="14" max="99" required></div>
+        <div><label class="fl" for="tel">Teléfono * (con código de país)</label><input class="fi" type="tel" id="tel" placeholder="+54 9 11 XXXX XXXX" autocomplete="tel" required></div>
+      </div>
+      <label class="fl" for="email" style="margin-top:.75rem">Email *</label>
+      <input class="fi" type="email" id="email" placeholder="tu@email.com" autocomplete="email" required>
+      <div class="fi-row" style="margin-top:.75rem">
+        <div><label class="fl" for="pais">País de residencia *</label><input class="fi" type="text" id="pais" placeholder="Argentina" required></div>
+        <div><label class="fl" for="nac">Nacionalidad</label><input class="fi" type="text" id="nac" placeholder="Argentina"></div>
+      </div>
+      <button class="fbtn" onclick="goStep(2)" type="button">Siguiente <i class="ti ti-arrow-right"></i></button>
+    </div>
+
+    <!-- PASO 2 -->
+    <div class="form-step" id="step2">
+      <p class="form-step-title">Paso 2 — <em>Motivo y disponibilidad</em></p>
+      <p class="form-desc">Mientras más nos contés, mejor podemos orientarte.</p>
+      <label class="fl" for="motivo">¿Qué te motiva a comenzar terapia?</label>
+      <textarea class="fta" id="motivo" placeholder="Podés describir cómo te sentís, qué se repite o qué te llevó a buscar un profesional ahora."></textarea>
+      <label class="fl" for="modalidad" style="margin-top:.75rem">Modalidad de atención que preferís *</label>
+      <select class="fsel" id="modalidad" required>
+        <option value="">Seleccioná una opción</option>
+        <option>Presencial</option>
+        <option>Virtual</option>
+        <option>Indistinto</option>
+      </select>
+      <label class="fl" for="zona" style="margin-top:.75rem">¿En qué zona o localidad preferís atenderte? (si es presencial)</label>
+      <input class="fi" type="text" id="zona" placeholder="Ej: Palermo, Buenos Aires">
+      <label class="fl" for="horarios" style="margin-top:.75rem">¿Qué días y horarios tenés disponibles?</label>
+      <input class="fi" type="text" id="horarios" placeholder="Ej: Lunes y miércoles de tarde">
+      <button class="fbtn" onclick="goStep(3)" type="button">Siguiente <i class="ti ti-arrow-right"></i></button>
+      <button class="fbtn-back" onclick="goStep(1)" type="button">← Volver</button>
+    </div>
+
+    <!-- PASO 3 -->
+    <div class="form-step" id="step3">
+      <p class="form-step-title">Paso 3 — <em>Preferencias y honorarios</em></p>
+      <p class="form-desc">Esto nos permite encontrar el perfil más adecuado para vos.</p>
+      <label class="fl" for="trat">¿Estás bajo algún tratamiento actualmente?</label>
+      <select class="fsel" id="trat">
+        <option value="">Seleccioná una opción</option>
+        <option>Psicológico</option>
+        <option>Psiquiátrico</option>
+        <option>Médico por otra condición</option>
+        <option>No estoy bajo tratamiento</option>
+      </select>
+      <label class="fl" for="genero-pref" style="margin-top:.75rem">¿Tenés preferencia por el género de tu terapeuta?</label>
+      <select class="fsel" id="genero-pref">
+        <option>Indistinto</option>
+        <option>Mujer</option>
+        <option>Varón</option>
+      </select>
+      <label class="fl" for="edad-pref" style="margin-top:.75rem">¿Tenés preferencia por la franja etaria de tu terapeuta?</label>
+      <select class="fsel" id="edad-pref">
+        <option>Edad indistinta</option>
+        <option>25–35 años</option>
+        <option>35–50 años</option>
+        <option>+50 años</option>
+      </select>
+      <label class="fl" for="honorarios" style="margin-top:.75rem">¿Cuál es tu posibilidad de honorarios por sesión?</label>
+      <input class="fi" type="text" id="honorarios" placeholder="Esta info nos permite orientarte. Tarifa mínima en Argentina: $20.000">
+      <p style="font-size:11.5px;color:rgba(255,247,236,.3);margin-top:.5rem;line-height:1.5">La orientación de Psi a Todo es sin costo. Solo abonás las sesiones con tu terapeuta una vez que empezás.</p>
+      <button class="fbtn" onclick="submitForm()" type="button">Enviar consulta <i class="ti ti-send"></i></button>
+      <button class="fbtn-back" onclick="goStep(2)" type="button">← Volver</button>
+    </div>
+
+    <!-- GRACIAS -->
+    <div class="form-thanks" id="thanks" role="alert" aria-live="polite">
+      <div class="form-thanks-icon"><i class="ti ti-circle-check"></i></div>
+      <h3>Recibimos tu consulta.</h3>
+      <p>Nos pondremos en contacto en menos de 24 horas hábiles<br>a través de WhatsApp.<br><br>Gracias por escribirnos y confiar en Psi a Todo.</p>
+    </div>
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+<script src="assets/nav-footer.js"></script>
+<script src="assets/shared.js"></script>
+</body>
+</html>

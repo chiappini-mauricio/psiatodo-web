@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <meta name="description" content="Novedades de Psi a Todo — reflexiones, lecturas y propuestas sobre salud mental.">
+  <title>Psi a Todo | Novedades</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600&family=Merriweather:ital,wght@0,400;1,300;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <span class="eyebrow eyebrow-yellow reveal">Reflexiones, lecturas y propuestas</span>
+    <h1 class="h1 light reveal d1">Desde adentro.</h1>
+    <p class="lead body-light reveal d2" style="max-width:440px;margin-top:1rem">
+      Escritura sobre salud mental que no simplifica ni embellece el padecimiento.
+    </p>
+    <img src="assets/formas/3.png" alt="" aria-hidden="true" style="position:absolute;right:-20px;bottom:0;width:200px;opacity:.18;pointer-events:none;">
+  </div>
+</section>
+
+<!-- FILTROS + GRID -->
+<section class="sec sec-cream">
+  <div class="inner">
+    <div class="news-filters reveal">
+      <button class="news-filter active" data-filter="all">Todos</button>
+      <button class="news-filter" data-filter="talleres">Talleres y seminarios</button>
+      <button class="news-filter" data-filter="psicoanalisis">Psicoanálisis</button>
+      <button class="news-filter" data-filter="clinica">Clínica</button>
+      <button class="news-filter" data-filter="acompanamiento">Acompañamiento</button>
+    </div>
+
+    <div class="news-grid">
+      <div class="news-card reveal d1" data-cat="talleres">
+        <p class="news-tag">Taller</p>
+        <h3>Pensar la práctica clínica: ¿pensamos o repetimos?</h3>
+        <p>Un espacio para incomodarnos un poco. Para cuestionar lo heredado. Para salir de posiciones tomadas sin haberlas interrogado.</p>
+        <p class="news-card-date">Mayo 2026 · Presencial + Virtual · Barcelona</p>
+        <a href="#">Ver más <i class="ti ti-arrow-right"></i></a>
+      </div>
+      <div class="news-card reveal d2" data-cat="psicoanalisis">
+        <p class="news-tag">Psicoanálisis</p>
+        <h3>La interpretación en Freud y la tradición postfreudiana</h3>
+        <p>Hacer consciente lo inconsciente: insight, elaboración y simbolización. La intervención en Lacan: el equívoco, el corte y la conmoción del sentido.</p>
+        <p class="news-card-date">Junio 2026 · Virtual</p>
+        <a href="#">Ver más <i class="ti ti-arrow-right"></i></a>
+      </div>
+      <div class="news-card reveal d1" data-cat="clinica">
+        <p class="news-tag">Clínica</p>
+        <h3>Acompañar el padecimiento subjetivo</h3>
+        <p>Supone alojar aquello que duele, escuchar sin apurar sentidos y sostener un espacio donde el malestar pueda ser dicho, pensado y trabajado en su singularidad.</p>
+        <p class="news-card-date">2026 · Artículo</p>
+        <a href="#">Leer artículo <i class="ti ti-arrow-right"></i></a>
+      </div>
+      <div class="news-card reveal d2" data-cat="acompanamiento">
+        <p class="news-tag">Acompañamiento</p>
+        <h3>No hay recetas. Hay preguntas.</h3>
+        <p>Y un espacio donde pensarlas con otros y otras. Reflexiones sobre la práctica de la derivación cuidada y el acompañamiento clínico.</p>
+        <p class="news-card-date">2026 · Artículo</p>
+        <a href="#">Leer artículo <i class="ti ti-arrow-right"></i></a>
+      </div>
+      <div class="news-card reveal d1" data-cat="talleres">
+        <p class="news-tag">Seminario</p>
+        <h3>Acompañar el padecimiento — clínica, formación y práctica compartida</h3>
+        <p>Un curso para profesionales que buscan detenerse, revisar su práctica y sostener el trabajo clínico con otros.</p>
+        <p class="news-card-date">2026 · Virtual · Sofía Pozner</p>
+        <a href="#">Ver más <i class="ti ti-arrow-right"></i></a>
+      </div>
+      <div class="news-card reveal d2" data-cat="psicoanalisis">
+        <p class="news-tag">Psicoanálisis</p>
+        <h3>El otro como logro</h3>
+        <p>Hay vínculos que se organizan alrededor de una promesa: la de alcanzar algo propio a través del otro. Cuando esto sucede, el otro deja de ser un otro.</p>
+        <p class="news-card-date">2026 · Artículo</p>
+        <a href="#">Leer artículo <i class="ti ti-arrow-right"></i></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="sec sec-cream" style="padding-top:0">
+  <div class="inner">
+    <div class="newsletter-box">
+      <div class="newsletter-inner">
+        <span class="eyebrow eyebrow-muted" style="margin-bottom:.75rem">Suscripción</span>
+        <h3>¿Querés recibir las novedades de Psi a Todo?</h3>
+        <p>Cargá tus datos y recibí propuestas y artículos directamente en tu mail.</p>
+        <div class="newsletter-row">
+          <input class="fi" type="email" placeholder="tu@email.com" autocomplete="email">
+          <button class="fbtn" style="margin-top:0" onclick="submitNewsletter(this)">Suscribirme</button>
+        </div>
+        <div style="display:flex;gap:.75rem;margin-top:.75rem">
+          <input class="fi" type="text" placeholder="Nombre" autocomplete="given-name" style="flex:1">
+          <input class="fi" type="text" placeholder="Apellido" autocomplete="family-name" style="flex:1">
+        </div>
+        <label style="display:flex;align-items:flex-start;gap:.6rem;margin-top:.75rem;cursor:pointer">
+          <input type="checkbox" style="margin-top:3px;accent-color:var(--yellow)">
+          <span style="font-size:11px;color:rgba(255,247,236,.4);line-height:1.5">He leído y acepto la política de privacidad.</span>
+        </label>
+        <p class="newsletter-note">Al hacer clic en el botón aceptás que tus datos sean procesados por herramientas de email marketing de acuerdo a sus políticas de privacidad.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+<script src="assets/nav-footer.js"></script>
+<script src="assets/shared.js"></script>
+<script>
+function submitNewsletter(btn) {
+  const box = btn.closest('.newsletter-inner');
+  box.innerHTML = '<div style="text-align:center;padding:1.5rem 0"><div style="font-size:2.5rem;color:var(--yellow);margin-bottom:.75rem"><i class="ti ti-circle-check"></i></div><p style="color:rgba(255,247,236,.7);font-size:14px">¡Gracias! Ya estás suscripto/a a las novedades de Psi a Todo.</p></div>';
+}
+</script>
+</body>
+</html>
