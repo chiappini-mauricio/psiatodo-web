@@ -95,7 +95,7 @@ function initSlider(containerId) {
   restart();
 }
 
-/* Counter animation */
+/* Counter animation - kept for potential future use */
 function animCount(id, target, duration) {
   const el = document.getElementById(id);
   if (!el) return;
@@ -106,15 +106,11 @@ function animCount(id, target, duration) {
     if (p < 1) requestAnimationFrame(update);
   })(performance.now());
 }
-function initCounters() {
-  animCount('c1', 92, 1200);
-  animCount('c2', 24, 900);
-  animCount('c3', 80, 1400);
-}
+// Only init counters if stat row exists
 const statRow = document.querySelector('.stat-row');
 if (statRow) {
   let ran = false;
-  new IntersectionObserver(([e]) => { if (e.isIntersecting && !ran) { ran = true; initCounters(); } }, { threshold: .5 }).observe(statRow);
+  new IntersectionObserver(([e]) => { if (e.isIntersecting && !ran) { ran = true; animCount('c1', 92, 1200); animCount('c2', 24, 900); animCount('c3', 80, 1400); } }, { threshold: .5 }).observe(statRow);
 }
 
 /* News filter */

@@ -19,13 +19,12 @@
     .hero-shapes { height:200px; position:relative; overflow:hidden; }
     .hero-shapes img { position:absolute; right:-20px; bottom:0; width:240px; }
     .hero-shapes .accent { right:auto; left:var(--pad); bottom:20px; width:70px; opacity:.18; }
-    /* Proposta de valor: 2 cols en desktop */
+    /* Proposta de valor: 2x2 grid */
     .valor-grid { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:rgba(33,33,33,.12); margin-top:1.5rem; }
-    @media(max-width:600px){ .valor-grid{ grid-template-columns:1fr; } }
-    .valor-cell { background:var(--cream); padding:1.5rem; }
-    .valor-cell h3 { font-family:'Times New Roman',serif; font-size:1.1rem; margin-bottom:.5rem; color:var(--dark); }
-    .valor-cell p  { font-size:13.5px; color:rgba(33,33,33,.68); line-height:1.72; }
-    .valor-cell .tag { display:inline-block; background:var(--yellow); color:var(--dark); font-size:10px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; padding:2px 8px; margin-bottom:.6rem; }
+    .valor-cell { background:var(--cream); padding:1.25rem 1.2rem; }
+    .valor-cell h3 { font-family:'Times New Roman',serif; font-size:.98rem; margin-bottom:.3rem; color:var(--dark); line-height:1.3; }
+    .valor-cell p  { font-size:13px; color:rgba(33,33,33,.82); line-height:1.6; }
+    .valor-cell .tag { display:inline-block; background:var(--yellow); color:var(--dark); font-size:9px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; padding:2px 7px; margin-bottom:.5rem; }
     /* Cómo funciona: layout lado a lado en desktop */
     .como-grid { display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:start; }
     @media(max-width:640px){ .como-grid{ grid-template-columns:1fr; gap:2rem; } }
@@ -47,17 +46,16 @@
 <section class="hero" id="inicio">
   <div class="hero-inner">
     <span class="eyebrow eyebrow-yellow reveal">Derivaciones con criterio clínico</span>
-    <h1 class="h1 light reveal d1" style="margin-bottom:.9rem">
+    <h1 class="h1 light reveal d1" style="margin-bottom:1.5rem">
       Empezar terapia no siempre es fácil.<br>
       <em>Encontrar al profesional adecuado, tampoco.</em>
     </h1>
-    <p class="body body-light reveal d2" style="max-width:420px;margin-bottom:2rem">
+    <a class="btn btn-yellow reveal d2" href="consulta.html">Quiero empezar <i class="ti ti-arrow-right"></i></a>
+    <p class="body reveal d3" style="max-width:420px;margin-top:1.5rem;color:rgba(255,247,236,.6)">
       A veces hay dudas, malas experiencias o confusión sobre por dónde y con quién empezar.
-      En Psi a Todo <strong style="color:var(--cream)">acompañamos ese primer momento:</strong>
-      organizamos tu búsqueda con escucha, criterio clínico y derivaciones cuidadas.
+      En Psi a Todo acompañamos ese primer momento con escucha, criterio clínico y derivaciones cuidadas.
     </p>
-    <a class="btn btn-yellow reveal d3" href="consulta.html">Quiero empezar <i class="ti ti-arrow-right"></i></a>
-    <span class="btn-note reveal d4">La orientación no tiene costo. Solo abonás las sesiones con tu terapeuta, una vez que iniciás.</span>
+    <span class="btn-note reveal d4" style="color:rgba(255,247,236,.5);margin-top:.5rem">La orientación no tiene costo. Solo abonás las sesiones con tu terapeuta, una vez que iniciás.</span>
   </div>
   <div class="hero-shapes" aria-hidden="true">
     <img src="assets/formas/25.png" alt="">
@@ -83,26 +81,30 @@
     <h2 class="h2 light reveal d1">
       Elegir psicólogo/a no debería ser<br>una decisión <em>al azar.</em>
     </h2>
-    <p class="body body-light reveal d2" style="max-width:520px">
-      Muchas personas postergan el inicio de su terapia por miedo a elegir mal o llegan cansadas de probar espacios que no funcionaron. Cuando la elección queda librada a un listado impersonal o a una recomendación suelta, a veces se termina abandonando.
+    <p class="body reveal d2" style="max-width:520px;color:rgba(255,247,236,.78)">
+      Muchas personas postergan el inicio de su terapia por miedo a elegir mal o llegan cansadas de probar espacios que no funcionaron. Cuando la elección queda librada a un listado impersonal, a veces se termina abandonando.
     </p>
-
-    <div class="stat-row">
-      <div class="stat reveal d1"><div class="stat-num"><span id="c1">0</span>%</div><div class="stat-label">Tasa de continuidad</div></div>
-      <div class="stat reveal d2"><div class="stat-num"><span id="c2">0</span>h</div><div class="stat-label">Respuesta máxima</div></div>
-      <div class="stat reveal d3"><div class="stat-num"><span id="c3">0</span>+</div><div class="stat-label">Profesionales en red</div></div>
-    </div>
 
     <div class="valor-grid" style="margin-top:2rem">
       <div class="valor-cell reveal d1">
         <span class="tag">Derivación clínica</span>
-        <h3>En Psi a Todo leemos cada consulta y la analizamos caso por caso</h3>
-        <p>Nuestra derivación es una decisión clínica para que tu proceso empiece en las mejores condiciones y pueda sostenerse. Leemos en profundidad cada motivo de consulta y situación particular.</p>
+        <h3>Leemos tu caso antes de derivarte</h3>
+        <p>Cada consulta es analizada individualmente. No somos un algoritmo.</p>
       </div>
       <div class="valor-cell reveal d2">
         <span class="tag">Sin costo de orientación</span>
-        <h3>Psicología al alcance</h3>
-        <p>Recibir orientación de Psi a Todo no tiene costo. Solo abonás la sesión con el/la terapeuta. Y si el factor económico es una barrera, podemos contactarte con profesionales que trabajan con aranceles reducidos, bajo la misma supervisión clínica.</p>
+        <h3>La orientación es gratuita</h3>
+        <p>Solo abonás las sesiones con tu terapeuta, una vez que empezás.</p>
+      </div>
+      <div class="valor-cell reveal d3">
+        <span class="tag">Presencial o virtual</span>
+        <h3>En todo el país y el exterior</h3>
+        <p>Ambas modalidades disponibles, según lo que necesites.</p>
+      </div>
+      <div class="valor-cell reveal d4">
+        <span class="tag">Red supervisada</span>
+        <h3>Distintos enfoques y especialidades</h3>
+        <p>Psicoanálisis, TCC, psiquiatría, orientación vocacional y más.</p>
       </div>
     </div>
 
@@ -127,7 +129,6 @@
         </div>
         <div class="reveal d4" style="margin-top:1.5rem">
           <a class="btn btn-red" href="consulta.html">Necesito orientación <i class="ti ti-arrow-right"></i></a>
-          <p class="body body-muted" style="font-size:12px;margin-top:.6rem">Nos encargamos de encontrar al profesional adecuado para tu caso.</p>
         </div>
       </div>
       <div class="como-aside reveal d2">
