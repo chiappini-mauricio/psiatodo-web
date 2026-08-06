@@ -43,7 +43,7 @@ body {
   top: 0;
   z-index: 200;
 }
-.nav-logo { height: 26px; width: auto; display: block; flex-shrink: 0; }
+.nav-logo { height: 16px; width: auto; display: block; flex-shrink: 0; }
 
 /* Desktop menu */
 .nav-links {
@@ -141,7 +141,7 @@ body {
 
 /* ─── SECTIONS ─── */
 .sec { padding: 3rem 0; position: relative; overflow: hidden; }
-.sec-dark  { background: var(--dark); color: var(--cream); }
+.sec-dark  { background: radial-gradient(ellipse 120% 90% at 15% 0%, #2b2b2b 0%, var(--dark) 55%); color: var(--cream); }
 .sec-cream { background: var(--cream); }
 .sec-blue  { background: var(--blue); color: var(--cream); }
 .sec-red   { background: var(--red); color: var(--cream); }
@@ -151,7 +151,8 @@ body {
   inset: 0;
   background-image: url('texturas/1.png');
   background-size: cover;
-  opacity: .04;
+  opacity: .07;
+  mix-blend-mode: overlay;
   pointer-events: none;
 }
 .sec .inner { position: relative; z-index: 1; }
@@ -247,6 +248,18 @@ mark.b { background: var(--blue);   color: var(--cream); padding: 0 4px; }
 .card-dark h3 { color:var(--cream); }
 .card-dark p  { color:rgba(255,247,236,.78); }
 
+/* ─── TEXT LIST (párrafos divididos por línea, sin recuadros) ─── */
+.text-list { display:flex; flex-direction:column; margin-top:1.75rem; }
+.text-item { padding:1.5rem 0; border-bottom:.5px solid rgba(255,247,236,.12); }
+.text-item:first-child { padding-top:0; }
+.text-item:last-child { border-bottom:none; padding-bottom:0; }
+.text-item h3 { font-family:'Times New Roman',serif; font-weight:400; font-size:1.1rem; letter-spacing:-.005em; color:var(--cream); margin-bottom:.5rem; }
+.text-item p  { font-size:14px; line-height:1.75; color:rgba(255,247,236,.7); }
+/* variante para uso sobre fondo claro */
+.text-list.on-cream .text-item { border-bottom-color:rgba(33,33,33,.12); }
+.text-list.on-cream .text-item h3 { color:var(--dark); }
+.text-list.on-cream .text-item p  { color:rgba(33,33,33,.75); }
+
 
 /* ─── BLOCKQUOTE / HIGHLIGHT ─── */
 .highlight {
@@ -285,7 +298,10 @@ blockquote.testimonial strong { color:var(--yellow); font-style:normal; font-wei
 .stat-label { font-size:11px; color:rgba(255,247,236,.52); letter-spacing:.08em; text-transform:uppercase; margin-top:.25rem; }
 
 /* ─── DECORATIVE SHAPES ─── */
-.deco { position:absolute; pointer-events:none; z-index:0; }
+/* mix-blend-mode hace que las formas se integren con el fondo en vez de
+   sentirse "pegadas" encima; filter suaviza el borde recortado del PNG. */
+.deco { position:absolute; pointer-events:none; z-index:0; mix-blend-mode:multiply; filter:blur(.3px); }
+.sec-dark .deco, .page-hero .deco { mix-blend-mode:overlay; }
 
 /* ─── TESTIMONIALS SLIDER ─── */
 .tslider-wrap { position:relative; overflow:hidden; margin-top:1.5rem; }
@@ -470,8 +486,9 @@ blockquote.testimonial strong { color:var(--yellow); font-style:normal; font-wei
 .post-content p { margin-bottom:1.3rem; }
 .post-content h2 { font-family:'Times New Roman',serif; font-size:1.5rem; line-height:1.25; color:var(--dark); margin:2.25rem 0 .9rem; letter-spacing:-.01em; }
 .post-content h3 { font-family:'Times New Roman',serif; font-size:1.2rem; color:var(--dark); margin:1.75rem 0 .6rem; }
-.post-content a { color:var(--red); text-decoration:underline; text-underline-offset:2px; }
-.post-content a:hover { color:var(--dark); }
+.post-content a:not(.btn) { color:var(--red); text-decoration:underline; text-underline-offset:2px; }
+.post-content a:not(.btn):hover { color:var(--dark); }
+.post-content a.btn { text-decoration:none; }
 .post-content strong { font-weight:600; color:var(--dark); }
 .post-content em { font-style:italic; }
 .post-content ul, .post-content ol { margin:0 0 1.3rem 1.2rem; }

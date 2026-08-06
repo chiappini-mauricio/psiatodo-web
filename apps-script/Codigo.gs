@@ -24,6 +24,10 @@
  *  7. COPIÁ la URL que te da (termina en /exec)
  *  8. Pegá esa URL en assets/config.js del sitio
  * ─────────────────────────────────────────────────────────────
+ *
+ * URL DE LA IMPLEMENTACIÓN ACTUAL (ya cargada en assets/config.js):
+ * https://script.google.com/macros/s/AKfycbwvUUrx_Z5VShOijnkTM7gkYVKdZ3Ya8mRu4zEU9k4WUpR2HPYMKc82bq_N5gPTy7zFGQ/exec
+ * ─────────────────────────────────────────────────────────────
  */
 
 
