@@ -198,8 +198,8 @@ function doPost(e) {
 
     hoja.appendRow(fila);
 
-    // Notificación por mail (opcional — descomentar y poner el mail)
-    // enviarNotificacion(datos, nombreHoja);
+    // Notificación por mail
+    enviarNotificacion(datos, nombreHoja);
 
     return ContentService
       .createTextOutput(JSON.stringify({ ok: true }))

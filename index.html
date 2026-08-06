@@ -13,12 +13,13 @@
   <link rel="stylesheet" href="assets/style.css">
   <style>
     /* Hero específico del home */
-    .hero { background:var(--dark); position:relative; overflow:hidden; }
+    .hero { background:var(--dark); position:relative; overflow:hidden; padding-bottom:2.5rem; }
     .hero::before { content:''; position:absolute; inset:0; background-image:url('assets/texturas/1.png'); background-size:cover; opacity:.04; pointer-events:none; }
     .hero-inner { max-width:var(--max); margin:0 auto; padding:4rem var(--pad) 0; position:relative; z-index:2; }
-    .hero-shapes { height:200px; position:relative; overflow:hidden; }
-    .hero-shapes img { position:absolute; right:-20px; bottom:0; width:240px; opacity:.85; mix-blend-mode:overlay; }
-    .hero-shapes .accent { right:auto; left:var(--pad); bottom:20px; width:70px; opacity:.18; }
+    .hero-deco { position:absolute; pointer-events:none; z-index:1; mix-blend-mode:overlay; }
+    .hero-deco-main { width:280px; right:-50px; bottom:-40px; opacity:.55; }
+    .hero-deco-accent { width:80px; left:calc(var(--pad) + 10px); bottom:1.75rem; opacity:.16; }
+    @media(max-width:480px){ .hero-deco-main{ width:220px; right:-40px; bottom:-30px; } }
     /* Proposta de valor: 2x2 grid */
     .valor-grid { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:rgba(33,33,33,.12); margin-top:1.5rem; }
     .valor-cell { background:var(--cream); padding:1.25rem 1.2rem; }
@@ -57,10 +58,8 @@
     </p>
     <span class="btn-note reveal d4" style="color:rgba(255,247,236,.5);margin-top:.5rem">La orientación no tiene costo. Solo abonás las sesiones con tu terapeuta, una vez que iniciás.</span>
   </div>
-  <div class="hero-shapes" aria-hidden="true">
-    <img src="assets/formas/25.png" alt="">
-    <img class="accent" src="assets/formas/10.png" alt="">
-  </div>
+  <img class="hero-deco hero-deco-main" src="assets/formas/25.png" alt="" aria-hidden="true">
+  <img class="hero-deco hero-deco-accent" src="assets/formas/10.png" alt="" aria-hidden="true">
 </section>
 
 <!-- MARQUEE -->
