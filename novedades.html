@@ -27,56 +27,13 @@
 <!-- FILTROS + GRID -->
 <section class="sec sec-cream">
   <div class="inner">
-    <div class="news-filters reveal">
+    <div class="news-filters reveal" id="news-filters">
       <button class="news-filter active" data-filter="all">Todos</button>
-      <button class="news-filter" data-filter="talleres">Talleres y seminarios</button>
-      <button class="news-filter" data-filter="psicoanalisis">Psicoanálisis</button>
-      <button class="news-filter" data-filter="clinica">Clínica</button>
-      <button class="news-filter" data-filter="acompanamiento">Acompañamiento</button>
     </div>
 
-    <div class="news-grid">
-      <div class="news-card reveal d1" data-cat="talleres">
-        <p class="news-tag">Taller</p>
-        <h3>Pensar la práctica clínica: ¿pensamos o repetimos?</h3>
-        <p>Un espacio para incomodarnos un poco. Para cuestionar lo heredado. Para salir de posiciones tomadas sin haberlas interrogado.</p>
-        <p class="news-card-date">Mayo 2026 · Presencial + Virtual · Barcelona</p>
-        <a href="#">Ver más <i class="ti ti-arrow-right"></i></a>
-      </div>
-      <div class="news-card reveal d2" data-cat="psicoanalisis">
-        <p class="news-tag">Psicoanálisis</p>
-        <h3>La interpretación en Freud y la tradición postfreudiana</h3>
-        <p>Hacer consciente lo inconsciente: insight, elaboración y simbolización. La intervención en Lacan: el equívoco, el corte y la conmoción del sentido.</p>
-        <p class="news-card-date">Junio 2026 · Virtual</p>
-        <a href="#">Ver más <i class="ti ti-arrow-right"></i></a>
-      </div>
-      <div class="news-card reveal d1" data-cat="clinica">
-        <p class="news-tag">Clínica</p>
-        <h3>Acompañar el padecimiento subjetivo</h3>
-        <p>Supone alojar aquello que duele, escuchar sin apurar sentidos y sostener un espacio donde el malestar pueda ser dicho, pensado y trabajado en su singularidad.</p>
-        <p class="news-card-date">2026 · Artículo</p>
-        <a href="#">Leer artículo <i class="ti ti-arrow-right"></i></a>
-      </div>
-      <div class="news-card reveal d2" data-cat="acompanamiento">
-        <p class="news-tag">Acompañamiento</p>
-        <h3>No hay recetas. Hay preguntas.</h3>
-        <p>Y un espacio donde pensarlas con otros y otras. Reflexiones sobre la práctica de la derivación cuidada y el acompañamiento clínico.</p>
-        <p class="news-card-date">2026 · Artículo</p>
-        <a href="#">Leer artículo <i class="ti ti-arrow-right"></i></a>
-      </div>
-      <div class="news-card reveal d1" data-cat="talleres">
-        <p class="news-tag">Seminario</p>
-        <h3>Acompañar el padecimiento — clínica, formación y práctica compartida</h3>
-        <p>Un curso para profesionales que buscan detenerse, revisar su práctica y sostener el trabajo clínico con otros.</p>
-        <p class="news-card-date">2026 · Virtual · Sofía Pozner</p>
-        <a href="#">Ver más <i class="ti ti-arrow-right"></i></a>
-      </div>
-      <div class="news-card reveal d2" data-cat="psicoanalisis">
-        <p class="news-tag">Psicoanálisis</p>
-        <h3>El otro como logro</h3>
-        <p>Hay vínculos que se organizan alrededor de una promesa: la de alcanzar algo propio a través del otro. Cuando esto sucede, el otro deja de ser un otro.</p>
-        <p class="news-card-date">2026 · Artículo</p>
-        <a href="#">Leer artículo <i class="ti ti-arrow-right"></i></a>
+    <div class="news-grid" id="news-grid">
+      <div class="news-card" style="grid-column:1/-1;text-align:center;padding:2.5rem 1.5rem">
+        <p style="color:rgba(33,33,33,.5);font-size:13px">Cargando propuestas…</p>
       </div>
     </div>
   </div>
@@ -109,8 +66,10 @@
 </section>
 
 <div id="footer-placeholder"></div>
+<script src="assets/config.js"></script>
 <script src="assets/nav-footer.js"></script>
 <script src="assets/shared.js"></script>
+<script src="assets/sheets.js"></script>
 <script>
 function submitNewsletter(btn) {
   const box = btn.closest('.newsletter-inner');

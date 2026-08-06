@@ -80,23 +80,23 @@
 
     <div class="reveal d2">
       <label class="fl-light">Nombre *</label>
-      <input class="fi-light" type="text" placeholder="Tu nombre" autocomplete="given-name">
+      <input class="fi-light" type="text" name="nombre" placeholder="Tu nombre" autocomplete="given-name">
       <label class="fl-light">Apellido *</label>
-      <input class="fi-light" type="text" placeholder="Tu apellido" autocomplete="family-name">
+      <input class="fi-light" type="text" name="apellido" placeholder="Tu apellido" autocomplete="family-name">
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem">
         <div>
           <label class="fl-light">Email *</label>
-          <input class="fi-light" type="email" placeholder="tu@email.com" autocomplete="email">
+          <input class="fi-light" type="email" name="email" placeholder="tu@email.com" autocomplete="email">
         </div>
         <div>
           <label class="fl-light">Teléfono *</label>
-          <input class="fi-light" type="tel" placeholder="+54 9 11 XXXX XXXX" autocomplete="tel">
+          <input class="fi-light" type="tel" name="telefono" placeholder="+54 9 11 XXXX XXXX" autocomplete="tel">
         </div>
       </div>
       <label class="fl-light">Matrícula profesional *</label>
-      <input class="fi-light" type="text" placeholder="Ej: MN 12345">
+      <input class="fi-light" type="text" name="matricula" placeholder="Ej: MN 12345">
       <label class="fl-light">Enfoque/especialidad *</label>
-      <select class="fsel-light">
+      <select class="fsel-light" name="enfoque">
         <option value="">Seleccioná una opción</option>
         <option>Psicoanálisis</option>
         <option>Terapia cognitivo-conductual</option>
@@ -106,7 +106,7 @@
         <option>Otro</option>
       </select>
       <label class="fl-light">Años de experiencia</label>
-      <select class="fsel-light">
+      <select class="fsel-light" name="experiencia">
         <option value="">Seleccioná una opción</option>
         <option>Primer año de ejercicio (joven profesional)</option>
         <option>1 a 3 años</option>
@@ -114,13 +114,13 @@
         <option>Más de 7 años</option>
       </select>
       <label class="fl-light">Modalidad de atención que ofrecés</label>
-      <select class="fsel-light">
+      <select class="fsel-light" name="modalidad">
         <option>Presencial y virtual</option>
         <option>Solo presencial</option>
         <option>Solo virtual</option>
       </select>
       <label class="fl-light">Contanos brevemente tu recorrido y por qué querés sumarte a Psi a Todo</label>
-      <textarea class="fta-light" placeholder="Tu motivación, especialidades, población con la que trabajás..." style="min-height:120px"></textarea>
+      <textarea class="fta-light" name="mensaje" placeholder="Tu motivación, especialidades, población con la que trabajás..." style="min-height:120px"></textarea>
       <button class="fbtn-light" onclick="submitPostulacion(this)">Enviar postulación <i class="ti ti-send"></i></button>
       <p class="postul-note">* Nos contactaremos a la brevedad para continuar el proceso de incorporación.</p>
     </div>
@@ -134,11 +134,20 @@
 </section>
 
 <div id="footer-placeholder"></div>
+<script src="assets/config.js"></script>
 <script src="assets/nav-footer.js"></script>
 <script src="assets/shared.js"></script>
+<script src="assets/sheets.js"></script>
 <script>
-function submitPostulacion(btn) {
-  btn.closest('div').style.display = 'none';
+async function submitPostulacion(btn) {
+  btn.disabled = true;
+  btn.textContent = 'Enviando…';
+
+  const cont = btn.closest('div');
+  const datos = juntarDatos(cont);
+  await enviarAPlanilla('postulacion', datos);
+
+  cont.style.display = 'none';
   document.getElementById('postul-thanks').style.display = 'block';
 }
 </script>

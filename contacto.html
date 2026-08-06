@@ -77,13 +77,13 @@
       <!-- FORM -->
       <div class="reveal d2">
         <label class="fl-light">Nombre *</label>
-        <input class="fi-light" type="text" placeholder="Tu nombre" autocomplete="given-name" required>
+        <input class="fi-light" type="text" name="nombre" placeholder="Tu nombre" autocomplete="given-name" required>
         <label class="fl-light">Apellido *</label>
-        <input class="fi-light" type="text" placeholder="Tu apellido" autocomplete="family-name" required>
+        <input class="fi-light" type="text" name="apellido" placeholder="Tu apellido" autocomplete="family-name" required>
         <label class="fl-light">Email *</label>
-        <input class="fi-light" type="email" placeholder="tu@email.com" autocomplete="email" required>
+        <input class="fi-light" type="email" name="email" placeholder="tu@email.com" autocomplete="email" required>
         <label class="fl-light">Teléfono</label>
-        <input class="fi-light" type="tel" placeholder="+54 9 11 XXXX XXXX" autocomplete="tel">
+        <input class="fi-light" type="tel" name="telefono" placeholder="+54 9 11 XXXX XXXX" autocomplete="tel">
 
         <label class="fl-light">Soy:</label>
         <div class="radio-group">
@@ -94,7 +94,7 @@
         </div>
 
         <label class="fl-light">Mensaje *</label>
-        <textarea class="fta-light" placeholder="¿En qué podemos ayudarte?" style="min-height:110px" required></textarea>
+        <textarea class="fta-light" name="mensaje" placeholder="¿En qué podemos ayudarte?" style="min-height:110px" required></textarea>
         <button class="fbtn-light" onclick="submitContacto(this)">Enviar mensaje <i class="ti ti-send"></i></button>
 
         <div id="contacto-thanks" style="display:none;padding:2rem 0;text-align:center">
@@ -108,11 +108,20 @@
 </section>
 
 <div id="footer-placeholder"></div>
+<script src="assets/config.js"></script>
 <script src="assets/nav-footer.js"></script>
 <script src="assets/shared.js"></script>
+<script src="assets/sheets.js"></script>
 <script>
-function submitContacto(btn) {
-  btn.closest('div').querySelectorAll('input,textarea,button,label').forEach(el => el.style.display='none');
+async function submitContacto(btn) {
+  btn.disabled = true;
+  btn.textContent = 'Enviando…';
+
+  const cont = btn.closest('div');
+  const datos = juntarDatos(cont);
+  await enviarAPlanilla('contacto', datos);
+
+  cont.querySelectorAll('input,textarea,button,label,select').forEach(el => el.style.display='none');
   document.getElementById('contacto-thanks').style.display = 'block';
 }
 </script>
