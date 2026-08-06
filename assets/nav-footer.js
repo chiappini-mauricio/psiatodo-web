@@ -1,6 +1,7 @@
 /* nav-footer.js — injects shared nav + footer + WA button */
 
 const NAV_HTML = `
+<div class="scroll-progress-bar" id="scrollProgress"></div>
 <nav class="nav" role="navigation" aria-label="Navegación principal">
   <a href="index.html"><img class="nav-logo" src="assets/logos/Logo_Blanco_Amarillo.png" alt="Psi a Todo"></a>
   <ul class="nav-links">
@@ -12,10 +13,14 @@ const NAV_HTML = `
     <li><a href="novedades.html">Novedades</a></li>
     <li><a href="contacto.html">Contacto</a></li>
     <li><a href="consulta.html" class="nav-cta">Quiero empezar</a></li>
+    <li><button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Cambiar tema"><i class="ti ti-moon" id="themeIcon"></i> <span id="themeLabel">Oscuro</span></button></li>
   </ul>
-  <button class="burger" id="burger" aria-label="Abrir menú" aria-expanded="false" onclick="toggleMenu()">
-    <span></span><span></span><span></span>
-  </button>
+  <div style="display:flex;align-items:center;gap:12px">
+    <button class="theme-toggle mob-theme-btn" onclick="toggleTheme()" aria-label="Cambiar tema"><i class="ti ti-moon" id="themeIconMob"></i></button>
+    <button class="burger" id="burger" aria-label="Abrir menú" aria-expanded="false" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 </nav>
 <div class="mob-menu" id="mobMenu" role="dialog" aria-label="Menú de navegación">
   <a href="index.html" onclick="closeMenu()">Inicio</a>

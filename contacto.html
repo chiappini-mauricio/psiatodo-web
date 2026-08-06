@@ -5,17 +5,28 @@
   <meta name="description" content="Contacto — Psi a Todo. Hablemos.">
   <title>Psi a Todo | Contacto</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600&family=Merriweather:ital,wght@0,400;1,300;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Raleway:wght@300;400;500;600&family=Merriweather:ital,wght@0,400;1,300;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
-  <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="assets/style.css?v=2.5">
   <style>
-    .contacto-grid { display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:start; }
-    @media(max-width:640px){ .contacto-grid{grid-template-columns:1fr;gap:2.5rem} }
-    .contacto-info-item { display:flex; gap:1rem; align-items:flex-start; margin-bottom:1.5rem; }
-    .contacto-info-icon { font-size:1.4rem; color:var(--red); flex-shrink:0; margin-top:2px; }
-    .contacto-info-label { font-size:10px; letter-spacing:.15em; text-transform:uppercase; color:rgba(33,33,33,.4); margin-bottom:.2rem; }
+    .contacto-grid { display:grid; grid-template-columns:1fr 1fr; gap:3.5rem; align-items:start; }
+    @media(max-width:768px){ .contacto-grid{grid-template-columns:1fr;gap:2.5rem} }
+    .contacto-info-item {
+      display:flex;
+      gap:1.1rem;
+      align-items:flex-start;
+      margin-bottom:1.25rem;
+      padding:1.1rem;
+      background:#ffffff;
+      border:1px solid rgba(33,33,33,0.08);
+      border-radius:12px;
+      transition:transform .3s ease, border-color .3s, box-shadow .3s;
+    }
+    .contacto-info-item:hover { transform: translateY(-3px); border-color:rgba(202,87,87,0.3); box-shadow:0 10px 24px rgba(0,0,0,0.04); }
+    .contacto-info-icon { font-size:1.5rem; color:var(--red); flex-shrink:0; margin-top:2px; filter: drop-shadow(0 0 6px rgba(202,87,87,0.3)); }
+    .contacto-info-label { font-size:10.5px; font-weight:700; letter-spacing:.15em; text-transform:uppercase; color:rgba(33,33,33,.45); margin-bottom:.25rem; }
     .contacto-info-val { font-size:14px; color:var(--dark); }
-    .contacto-info-val a { color:var(--red); text-decoration:none; }
+    .contacto-info-val a { color:var(--red); font-weight:600; text-decoration:none; transition:color .2s; }
     .contacto-info-val a:hover { text-decoration:underline; }
   </style>
 </head>
@@ -26,8 +37,7 @@
 <section class="page-hero">
   <div class="page-hero-inner">
     <span class="eyebrow eyebrow-yellow reveal">Estamos disponibles</span>
-    <h1 class="h1 light reveal d1">¿Tenés alguna consulta?<br><em>Hablemos.</em></h1>
-    <img src="assets/manos/10.png" alt="" aria-hidden="true" style="position:absolute;right:0;bottom:0;width:140px;opacity:.25;pointer-events:none;">
+    <h1 class="h1 hero-title reveal d1">¿Tenés alguna consulta?<br><em>Hablemos.</em></h1>
   </div>
 </section>
 

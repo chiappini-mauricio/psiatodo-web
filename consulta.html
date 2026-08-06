@@ -5,16 +5,32 @@
   <meta name="description" content="Formulario de consulta — Psi a Todo. El punto de partida de tu proceso terapéutico.">
   <title>Psi a Todo | Quiero empezar</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600&family=Merriweather:ital,wght@0,400;1,300;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Raleway:wght@300;400;500;600&family=Merriweather:ital,wght@0,400;1,300;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
-  <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="assets/style.css?v=2.5">
   <style>
-    .garantias { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:rgba(255,247,236,.08); margin-top:2rem; }
-    @media(max-width:500px){ .garantias{grid-template-columns:1fr} }
-    .garantia { background:rgba(255,247,236,.04); border:.5px solid rgba(255,247,236,.08); padding:1.25rem; display:flex; gap:.75rem; align-items:flex-start; }
-    .garantia-icon { font-size:1.3rem; color:var(--yellow); flex-shrink:0; margin-top:2px; }
-    .garantia h4 { font-size:.9rem; color:var(--cream); margin-bottom:.25rem; font-weight:600; }
-    .garantia p  { font-size:12.5px; color:rgba(255,247,236,.55); line-height:1.6; }
+    .garantias { display:grid; grid-template-columns:1fr 1fr; gap:1.25rem; margin-top:2.25rem; }
+    @media(max-width:550px){ .garantias{grid-template-columns:1fr} }
+    .garantia {
+      background: rgba(255,247,236,.04);
+      border: 1px solid rgba(255,247,236,.1);
+      border-radius: 16px;
+      padding: 1.5rem;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      backdrop-filter: blur(12px);
+      transition: transform .35s cubic-bezier(.16,1,.3,1), border-color .35s, box-shadow .35s, background .35s;
+    }
+    .garantia:hover {
+      transform: translateY(-5px);
+      border-color: rgba(237,189,53,0.35);
+      background: rgba(255,247,236,.07);
+      box-shadow: 0 16px 36px rgba(0,0,0,0.3);
+    }
+    .garantia-icon { font-size:1.5rem; color:var(--yellow); flex-shrink:0; margin-top:2px; filter: drop-shadow(0 0 8px rgba(237,189,53,0.4)); }
+    .garantia h4 { font-size:.95rem; color:var(--cream); margin-bottom:.3rem; font-weight:700; }
+    .garantia p  { font-size:13px; color:rgba(255,247,236,.68); line-height:1.62; }
   </style>
 </head>
 <body>
@@ -24,8 +40,8 @@
 <section class="page-hero">
   <div class="page-hero-inner">
     <span class="eyebrow eyebrow-yellow reveal">Primer paso</span>
-    <h1 class="h1 light reveal d1">Este formulario es el punto de partida<br>de tu proceso <em>terapéutico.</em></h1>
-    <p class="lead body-light reveal d2" style="max-width:480px;margin-top:1rem">
+    <h1 class="h1 hero-title reveal d1">Este formulario es el punto de partida<br>de tu proceso <em>terapéutico.</em></h1>
+    <p class="lead hero-lead reveal d2" style="max-width:480px;margin-top:1rem">
       La información brindada nos permite evaluar tu situación y encontrar al profesional de nuestra red que mejor pueda acompañarla.
     </p>
   </div>
@@ -58,9 +74,9 @@
 <!-- FORMULARIO MULTI-STEP -->
 <section class="form-section" id="formulario">
   <div class="form-header reveal">
-    <span class="eyebrow eyebrow-muted">Tu consulta</span>
-    <h2 class="h2 h2 light" style="color:var(--cream)">Contanos <em>qué buscás.</em></h2>
-    <p style="font-size:13.5px;color:rgba(255,247,236,.45);margin-top:.4rem">Presencial o virtual, según lo que necesités. Ambas modalidades están disponibles.</p>
+    <span class="eyebrow eyebrow-dark">Tu consulta</span>
+    <h2 class="h2 dark">Contanos <em>qué buscás.</em></h2>
+    <p style="font-size:13.5px;color:rgba(33,33,33,.65);margin-top:.4rem">Presencial o virtual, según lo que necesités. Ambas modalidades están disponibles.</p>
   </div>
 
   <div class="form-body">
@@ -139,7 +155,7 @@
       </select>
       <label class="fl" for="honorarios" style="margin-top:.75rem">¿Cuál es tu posibilidad de honorarios por sesión?</label>
       <input class="fi" type="text" id="honorarios" name="honorarios" data-sheet-placeholder="precio_texto" placeholder="Esta info nos permite orientarte. Tarifa mínima en Argentina: $20.000">
-      <p style="font-size:11.5px;color:rgba(255,247,236,.3);margin-top:.5rem;line-height:1.5">La orientación de Psi a Todo es sin costo. Solo abonás las sesiones con tu terapeuta una vez que empezás.</p>
+      <p style="font-size:11.5px;color:rgba(33,33,33,.5);margin-top:.5rem;line-height:1.5">La orientación de Psi a Todo es sin costo. Solo abonás las sesiones con tu terapeuta una vez que empezás.</p>
       <button class="fbtn" onclick="submitForm()" type="button">Enviar consulta <i class="ti ti-send"></i></button>
       <button class="fbtn-back" onclick="goStep(2)" type="button">← Volver</button>
     </div>
