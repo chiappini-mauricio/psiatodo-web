@@ -115,7 +115,10 @@ function leerTalleres(ss) {
       descripcion: item['descripcion'] || '',
       fecha:       item['fecha']       || '',
       modalidad:   item['modalidad']   || '',
-      link:        item['link']        || '#',
+      imagen:      item['imagen']      || '',
+      contenido:   item['contenido']   || '',
+      link:        item['link']        || '',
+      slug:        item['slug']        || generarSlug(item['titulo']),
       orden:       parseInt(item['orden'] || '99', 10)
     });
   }
@@ -124,6 +127,22 @@ function leerTalleres(ss) {
   talleres.sort(function(a, b) { return a.orden - b.orden; });
 
   return talleres;
+}
+
+
+/**
+ * Convierte un título en slug para la URL.
+ * "La compulsión de optimización" → "la-compulsion-de-optimizacion"
+ */
+function generarSlug(texto) {
+  if (!texto) return '';
+  return String(texto)
+    .toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')  // saca acentos
+    .replace(/[^a-z0-9\s-]/g, '')                       // saca símbolos
+    .trim()
+    .replace(/\s+/g, '-')
+    .substring(0, 60);
 }
 
 
@@ -247,36 +266,50 @@ function crearEstructuraInicial() {
   // ── Pestaña TALLERES ──
   var talleres = ss.getSheetByName('Talleres') || ss.insertSheet('Talleres');
   talleres.clear();
-  talleres.getRange('A1:H1').setValues([[
-    'Orden', 'Publicado', 'Categoria', 'Titulo', 'Descripcion', 'Fecha', 'Modalidad', 'Link'
+  talleres.getRange('A1:K1').setValues([[
+    'Orden', 'Publicado', 'Categoria', 'Titulo', 'Descripcion',
+    'Fecha', 'Modalidad', 'Imagen', 'Contenido', 'Link', 'Slug'
   ]]);
-  talleres.getRange('A2:H4').setValues([
+  talleres.getRange('A2:K3').setValues([
     ['1', 'SI', 'Taller',
      'Pensar la práctica clínica: ¿pensamos o repetimos?',
      'Un espacio para incomodarnos un poco. Para cuestionar lo heredado.',
-     'Mayo 2026', 'Presencial + Virtual', '#'],
+     'Mayo 2026', 'Presencial + Virtual',
+     '',
+     'Pensar la práctica clínica implica algo más que aplicar conceptos o técnicas.\n\nSupone revisar lo que hacemos, cómo lo hacemos y desde dónde intervenimos.\n\n## Sobre el taller\n\nUn espacio para detenerse, revisar herramientas y sostener la clínica junto a otros.',
+     '', ''],
     ['2', 'SI', 'Psicoanálisis',
      'La interpretación en Freud y la tradición postfreudiana',
      'Hacer consciente lo inconsciente: insight, elaboración y simbolización.',
-     'Junio 2026', 'Virtual', '#'],
-    ['3', 'NO', 'Clínica',
-     'Ejemplo de taller NO publicado',
-     'Este no aparece en la web porque Publicado dice NO.',
-     '2026', 'Virtual', '#']
+     'Junio 2026', 'Virtual',
+     '',
+     'La interpretación ocupa un lugar central en la práctica analítica.\n\nEn Freud, se trata de hacer consciente lo inconsciente. En Lacan, la intervención pasa por el equívoco, el corte y la conmoción del sentido.',
+     '', '']
   ]);
-  talleres.getRange('A1:H1')
+  talleres.getRange('A1:K1')
           .setFontWeight('bold')
           .setBackground('#212121')
           .setFontColor('#fff7ec');
-  talleres.setColumnWidth(1, 60);
-  talleres.setColumnWidth(2, 80);
-  talleres.setColumnWidth(3, 120);
-  talleres.setColumnWidth(4, 300);
-  talleres.setColumnWidth(5, 340);
-  talleres.setColumnWidth(6, 120);
-  talleres.setColumnWidth(7, 150);
-  talleres.setColumnWidth(8, 200);
+  talleres.setColumnWidth(1, 60);   // Orden
+  talleres.setColumnWidth(2, 85);   // Publicado
+  talleres.setColumnWidth(3, 120);  // Categoria
+  talleres.setColumnWidth(4, 280);  // Titulo
+  talleres.setColumnWidth(5, 300);  // Descripcion
+  talleres.setColumnWidth(6, 110);  // Fecha
+  talleres.setColumnWidth(7, 140);  // Modalidad
+  talleres.setColumnWidth(8, 220);  // Imagen
+  talleres.setColumnWidth(9, 380);  // Contenido
+  talleres.setColumnWidth(10, 180); // Link
+  talleres.setColumnWidth(11, 160); // Slug
   talleres.setFrozenRows(1);
+  talleres.getRange('I2:I200').setWrap(true);
+  talleres.getRange('E2:E200').setWrap(true);
+
+  // Nota explicativa en la fila de encabezados
+  talleres.getRange('H1').setNote('URL de una imagen pública.\nPuede ser de Unsplash, Drive (link directo) o cualquier hosting.\nDejar vacío si no tiene imagen.');
+  talleres.getRange('I1').setNote('Texto completo de la nota.\n\nUsá:\n## Título de sección\n**negrita**\n*cursiva*\n[texto](https://link.com)\n\nSeparar párrafos con línea en blanco.');
+  talleres.getRange('J1').setNote('Si querés que "Ver más" lleve a una página externa (ej: inscripción),\npegá la URL acá.\n\nSi lo dejás vacío y hay Contenido, abre la nota dentro del sitio.');
+  talleres.getRange('K1').setNote('Se genera solo desde el título.\nSolo completar si querés una URL personalizada.');
 
   // Validación: Publicado solo SI o NO
   var reglaPublicado = SpreadsheetApp.newDataValidation()
@@ -310,10 +343,10 @@ function crearEstructuraInicial() {
   // ── Pestaña CONTACTO ──
   var contacto = ss.getSheetByName('Contacto') || ss.insertSheet('Contacto');
   if (contacto.getLastRow() === 0) {
-    contacto.getRange('A1:F1').setValues([[
-      'fecha', 'nombre', 'apellido', 'email', 'telefono', 'mensaje'
+    contacto.getRange('A1:G1').setValues([[
+      'fecha', 'nombre', 'apellido', 'email', 'telefono', 'soy', 'mensaje'
     ]]);
-    contacto.getRange('A1:F1')
+    contacto.getRange('A1:G1')
             .setFontWeight('bold')
             .setBackground('#212121')
             .setFontColor('#fff7ec');

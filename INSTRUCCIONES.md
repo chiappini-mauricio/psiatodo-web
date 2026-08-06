@@ -97,13 +97,67 @@ Listo. En 30 segundos el sitio está leyendo de la planilla.
 | **Orden** | Número — el más chico aparece primero | `1` |
 | **Publicado** | `SI` para que se vea, `NO` para ocultarlo | `SI` |
 | **Categoria** | Elegí del desplegable | `Taller` |
-| **Titulo** | Nombre del taller o artículo | `Pensar la práctica clínica` |
-| **Descripcion** | 1-2 oraciones | `Un espacio para incomodarnos...` |
+| **Titulo** | Nombre del taller o artículo | `La compulsión de optimización` |
+| **Descripcion** | 1-2 oraciones — es lo que se ve en el listado | `Cuando hasta el placer trabaja...` |
 | **Fecha** | Texto libre | `Mayo 2026` |
 | **Modalidad** | Texto libre | `Presencial + Virtual` |
-| **Link** | URL de inscripción, o `#` si todavía no hay | `https://...` |
+| **Imagen** | URL de la imagen (ver abajo) | `https://...jpg` |
+| **Contenido** | El texto completo de la nota | *(ver formato abajo)* |
+| **Link** | Solo si querés que lleve a una web externa | `https://...` |
+| **Slug** | Dejar vacío — se genera solo | |
 
 3. Guardá (Google Sheets guarda solo)
+
+---
+
+#### Sobre la columna **Imagen**
+
+Va la URL de una imagen pública. Opciones:
+
+- **Subirla a Google Drive:** click derecho → Compartir → "Cualquier persona con el enlace". Después copiá el ID del link y armá la URL así:
+  `https://drive.google.com/uc?export=view&id=EL_ID_ACA`
+- **Usar un banco gratuito:** [Unsplash](https://unsplash.com) o [Pexels](https://pexels.com) — click derecho en la imagen → "Copiar dirección de la imagen"
+- **Dejarlo vacío:** aparece una forma geométrica de la marca como placeholder
+
+> Ideal: imágenes horizontales, mínimo 800px de ancho.
+
+---
+
+#### Sobre la columna **Contenido**
+
+Acá va el texto completo de la nota. Se admite formato simple:
+
+```
+Este es un párrafo normal.
+
+Este es otro párrafo. Separá cada uno con una línea en blanco.
+
+## Este es un subtítulo
+
+Podés usar **negrita** y *cursiva*.
+
+También [links a otras páginas](https://ejemplo.com).
+
+> Esto queda como una cita destacada en amarillo.
+
+- Punto de una lista
+- Otro punto
+```
+
+Para escribir cómodo: hacé doble click en la celda, o usá `Ctrl + Enter`
+para saltar de línea dentro de la misma celda.
+
+---
+
+#### ¿Cuándo se abre una nota interna y cuándo un link externo?
+
+- Si completás **Contenido** y dejás **Link** vacío → "Ver más" abre la nota
+  dentro del sitio (`novedad.html`)
+- Si completás **Link** → "Ver más" lleva a esa URL externa (útil para
+  inscripciones, formularios de Google, etc.)
+- Si no completás ninguno de los dos → la tarjeta se muestra sin botón
+
+---
 
 **Para ocultar un taller viejo:** cambiá su `Publicado` de `SI` a `NO`.
 No hace falta borrar la fila — así queda el historial.

@@ -14,7 +14,7 @@
  * que están más abajo en DEFAULTS.
  */
 
-const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbwvUUrx_Z5VShOijnkTM7gkYVKdZ3Ya8mRu4zEU9k4WUpR2HPYMKc82bq_N5gPTy7zFGQ/exec';   // ← PEGAR ACÁ LA URL DEL APPS SCRIPT
+const SHEETS_URL = '';   // ← PEGAR ACÁ LA URL DEL APPS SCRIPT
 
 
 /**
@@ -34,10 +34,13 @@ const DEFAULTS = {
     {
       categoria: 'Taller',
       titulo: 'Pensar la práctica clínica: ¿pensamos o repetimos?',
-      descripcion: 'Un espacio para incomodarnos un poco. Para cuestionar lo heredado. Para salir de posiciones tomadas sin haberlas interrogado.',
+      descripcion: 'Un espacio para incomodarnos un poco. Para cuestionar lo heredado y salir de posiciones tomadas sin haberlas interrogado.',
       fecha: 'Mayo 2026',
       modalidad: 'Presencial + Virtual',
-      link: '#'
+      imagen: '',
+      contenido: 'Pensar la práctica clínica implica algo más que aplicar conceptos o técnicas.\n\nSupone revisar lo que hacemos, cómo lo hacemos y desde dónde intervenimos.\n\n## Sobre el taller\n\nUn espacio para detenerse, revisar herramientas y sostener la clínica junto a otros. No hay recetas: hay preguntas, y un lugar donde pensarlas con otros y otras.',
+      link: '',
+      slug: 'pensar-la-practica-clinica-pensamos-o-repetimos'
     },
     {
       categoria: 'Psicoanálisis',
@@ -45,23 +48,32 @@ const DEFAULTS = {
       descripcion: 'Hacer consciente lo inconsciente: insight, elaboración y simbolización. La intervención en Lacan: el equívoco, el corte y la conmoción del sentido.',
       fecha: 'Junio 2026',
       modalidad: 'Virtual',
-      link: '#'
+      imagen: '',
+      contenido: 'La interpretación ocupa un lugar central en la práctica analítica, pero su sentido cambió mucho a lo largo de la historia del psicoanálisis.\n\n## En Freud\n\nSe trata de hacer consciente lo inconsciente. El trabajo pasa por el insight, la elaboración y la simbolización.\n\n## En Lacan\n\nLa intervención pasa por el equívoco, el corte y la conmoción del sentido. No se trata de develar un significado oculto, sino de producir un efecto en el decir.',
+      link: '',
+      slug: 'la-interpretacion-en-freud-y-la-tradicion-postfreud'
     },
     {
       categoria: 'Clínica',
       titulo: 'Acompañar el padecimiento subjetivo',
-      descripcion: 'Supone alojar aquello que duele, escuchar sin apurar sentidos y sostener un espacio donde el malestar pueda ser dicho, pensado y trabajado en su singularidad.',
+      descripcion: 'Alojar aquello que duele, escuchar sin apurar sentidos y sostener un espacio donde el malestar pueda ser dicho, pensado y trabajado.',
       fecha: '2026',
       modalidad: 'Artículo',
-      link: '#'
+      imagen: '',
+      contenido: 'Acompañar el padecimiento subjetivo supone alojar aquello que duele, escuchar sin apurar sentidos y sostener un espacio donde el malestar pueda ser dicho, pensado y trabajado en su singularidad.\n\nNo todo malestar puede ser nombrado rápido ni resuelto con una indicación. Algunas experiencias necesitan tiempo, presencia y un espacio donde decirse.',
+      link: '',
+      slug: 'acompanar-el-padecimiento-subjetivo'
     },
     {
       categoria: 'Acompañamiento',
       titulo: 'No hay recetas. Hay preguntas.',
-      descripcion: 'Y un espacio donde pensarlas con otros y otras. Reflexiones sobre la práctica de la derivación cuidada y el acompañamiento clínico.',
+      descripcion: 'Y un espacio donde pensarlas con otros y otras. Reflexiones sobre la derivación cuidada y el acompañamiento clínico.',
       fecha: '2026',
       modalidad: 'Artículo',
-      link: '#'
+      imagen: '',
+      contenido: 'Cuando alguien busca terapia, muchas veces lo que encuentra es un listado. Nombres, especialidades, precios.\n\nPero elegir con quién trabajar el propio padecimiento no debería ser una decisión al azar.\n\n## Una derivación es una decisión clínica\n\nLeer cada consulta antes de derivarla no es un trámite: es parte del trabajo. Es lo que hace que un proceso pueda empezar en las mejores condiciones y sostenerse en el tiempo.',
+      link: '',
+      slug: 'no-hay-recetas-hay-preguntas'
     }
   ]
 };

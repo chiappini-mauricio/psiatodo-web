@@ -8,7 +8,9 @@ document.querySelectorAll('.reveal, .reveal-left, .reveal-scale').forEach(el => 
 
 /* Nav: active link */
 (function() {
-  const path = location.pathname.split('/').pop() || 'index.html';
+  let path = location.pathname.split('/').pop() || 'index.html';
+  // La página de nota individual marca "Novedades" como activa
+  if (path === 'novedad.html') path = 'novedades.html';
   document.querySelectorAll('.nav-links a, .mob-menu a').forEach(a => {
     const href = a.getAttribute('href');
     if (href === path || (path === '' && href === 'index.html')) a.classList.add('active');

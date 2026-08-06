@@ -85,8 +85,11 @@ function aplicarContenido() {
     });
   }
 
-  // ── Grilla de talleres (solo en novedades.html) ──
+  // ── Grilla de talleres (novedades.html) ──
   renderTalleres();
+
+  // ── Nota individual (novedad.html) ──
+  renderNota();
 }
 
 
@@ -95,47 +98,64 @@ function aplicarContenido() {
    ═══════════════════════════════════════════ */
 
 function renderTalleres() {
-  const grid = document.getElementById('news-grid');
-  if (!grid) return;
+  const lista = document.getElementById('news-list');
+  if (!lista) return;
 
   const talleres = SITE.data.talleres || [];
 
   if (!talleres.length) {
-    grid.innerHTML = `
-      <div class="news-card" style="grid-column:1/-1;text-align:center;padding:3rem 1.5rem">
-        <p style="color:rgba(33,33,33,.6)">Próximamente publicaremos nuevas propuestas.</p>
+    lista.innerHTML = `
+      <div style="text-align:center;padding:3rem 1.5rem">
+        <p style="color:rgba(33,33,33,.55)">Próximamente publicaremos nuevas propuestas.</p>
       </div>`;
     return;
   }
 
-  grid.innerHTML = talleres.map((t, i) => {
-    const cat  = (t.categoria || 'Novedades');
-    const slug = cat.toLowerCase()
-                    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
-                    .replace(/\s+/g, '-');
+  lista.innerHTML = talleres.map((t, i) => {
+    const cat  = t.categoria || 'Novedades';
+    const slug = slugify(cat);
     const meta = [t.fecha, t.modalidad].filter(Boolean).join(' · ');
-    const esArticulo = /art[ií]culo/i.test(t.modalidad || '');
+    const tieneNota = !!(t.contenido && t.contenido.trim());
+
+    // Destino: link externo si lo hay, sino la nota interna, sino nada
+    let href = '#';
+    let target = '';
+    let label = 'Ver más';
+    if (t.link && t.link.trim() && t.link.trim() !== '#') {
+      href = t.link.trim();
+      target = ' target="_blank" rel="noopener"';
+      label = 'Ver más';
+    } else if (tieneNota) {
+      href = 'novedad.html?post=' + encodeURIComponent(t.slug || slugify(t.titulo));
+      label = /art[ií]culo/i.test(t.modalidad || '') ? 'Leer artículo' : 'Ver más';
+    }
+
+    // Miniatura: imagen real o placeholder con forma de marca
+    const forma = ['25','22','21','2','9'][i % 5];
+    const thumb = t.imagen && t.imagen.trim()
+      ? `<img class="news-thumb" src="${escapeAttr(t.imagen)}" alt="" loading="lazy"
+             onerror="this.outerHTML='<div class=\'news-thumb-ph\'><img src=\'assets/formas/${forma}.png\' alt=\'\'></div>'">`
+      : `<div class="news-thumb-ph"><img src="assets/formas/${forma}.png" alt=""></div>`;
 
     return `
-      <div class="news-card reveal ${i % 2 ? 'd2' : 'd1'}" data-cat="${slug}">
-        <p class="news-tag">${escapeHtml(cat)}</p>
-        <h3>${escapeHtml(t.titulo)}</h3>
-        <p>${escapeHtml(t.descripcion)}</p>
-        ${meta ? `<p class="news-card-date">${escapeHtml(meta)}</p>` : ''}
-        <a href="${escapeAttr(t.link || '#')}">
-          ${esArticulo ? 'Leer artículo' : 'Ver más'} <i class="ti ti-arrow-right"></i>
-        </a>
-      </div>`;
+      <a class="news-item reveal ${i % 2 ? 'd2' : 'd1'}" data-cat="${slug}" href="${escapeAttr(href)}"${target}>
+        <div>${thumb}</div>
+        <div class="news-body">
+          <span class="news-tag">${escapeHtml(cat)}</span>
+          <h3>${escapeHtml(t.titulo)}</h3>
+          ${t.descripcion ? `<p>${escapeHtml(t.descripcion)}</p>` : ''}
+          ${meta ? `<span class="news-meta">${escapeHtml(meta)}</span>` : ''}
+          ${href !== '#' ? `<span class="news-more">${label} <i class="ti ti-arrow-right"></i></span>` : ''}
+        </div>
+      </a>`;
   }).join('');
 
-  // Reconstruir los filtros según las categorías que existan
   renderFiltros(talleres);
 
-  // Volver a activar el scroll reveal en las cards nuevas
   if (typeof revealObs !== 'undefined') {
-    grid.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+    lista.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
   } else {
-    grid.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+    lista.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
   }
 }
 
@@ -144,7 +164,6 @@ function renderFiltros(talleres) {
   const cont = document.getElementById('news-filters');
   if (!cont) return;
 
-  // Categorías únicas, en el orden en que aparecen
   const cats = [];
   talleres.forEach(t => {
     const c = t.categoria || 'Novedades';
@@ -153,27 +172,160 @@ function renderFiltros(talleres) {
 
   cont.innerHTML =
     `<button class="news-filter active" data-filter="all">Todos</button>` +
-    cats.map(c => {
-      const slug = c.toLowerCase()
-                    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
-                    .replace(/\s+/g, '-');
-      return `<button class="news-filter" data-filter="${slug}">${escapeHtml(c)}</button>`;
-    }).join('');
+    cats.map(c => `<button class="news-filter" data-filter="${slugify(c)}">${escapeHtml(c)}</button>`).join('');
 
-  // Reconectar los clicks
   const filtros = cont.querySelectorAll('.news-filter');
-  const cards   = document.querySelectorAll('.news-card[data-cat]');
+  const items   = document.querySelectorAll('.news-item[data-cat]');
 
   filtros.forEach(btn => {
     btn.addEventListener('click', () => {
       filtros.forEach(f => f.classList.remove('active'));
       btn.classList.add('active');
       const cat = btn.dataset.filter;
-      cards.forEach(c => {
-        c.style.display = (cat === 'all' || c.dataset.cat === cat) ? '' : 'none';
+      items.forEach(el => {
+        el.style.display = (cat === 'all' || el.dataset.cat === cat) ? '' : 'none';
       });
     });
   });
+}
+
+
+/* ═══════════════════════════════════════════
+   PÁGINA DE NOTA INDIVIDUAL
+   ═══════════════════════════════════════════ */
+
+function renderNota() {
+  const cont = document.getElementById('post-root');
+  if (!cont) return;
+
+  const params = new URLSearchParams(location.search);
+  const buscado = params.get('post');
+
+  const talleres = SITE.data.talleres || [];
+  const nota = talleres.find(t => (t.slug || slugify(t.titulo)) === buscado);
+
+  if (!nota) {
+    cont.innerHTML = `
+      <section class="post-hero">
+        <div class="post-hero-inner">
+          <a class="post-back" href="novedades.html"><i class="ti ti-arrow-left"></i> Volver a novedades</a>
+          <h1 class="post-title">No encontramos esta nota</h1>
+          <p class="post-meta">Puede que haya sido despublicada o que el enlace esté mal.</p>
+        </div>
+      </section>
+      <div class="post-body">
+        <div class="post-content">
+          <a class="btn btn-red" href="novedades.html">Ver todas las novedades <i class="ti ti-arrow-right"></i></a>
+        </div>
+      </div>`;
+    return;
+  }
+
+  document.title = nota.titulo + ' | Psi a Todo';
+
+  const meta = [nota.fecha, nota.modalidad].filter(Boolean).join(' · ');
+
+  cont.innerHTML = `
+    <section class="post-hero">
+      <div class="post-hero-inner">
+        <a class="post-back" href="novedades.html"><i class="ti ti-arrow-left"></i> Volver a novedades</a>
+        <span class="post-tag">${escapeHtml(nota.categoria || 'Novedades')}</span>
+        <h1 class="post-title">${escapeHtml(nota.titulo)}</h1>
+        ${meta ? `<p class="post-meta">${escapeHtml(meta)}</p>` : ''}
+      </div>
+    </section>
+
+    ${nota.imagen && nota.imagen.trim()
+      ? `<img class="post-cover" src="${escapeAttr(nota.imagen)}" alt="" onerror="this.remove()">`
+      : ''}
+
+    <div class="post-body">
+      <article class="post-content">
+        ${formatearTexto(nota.contenido || nota.descripcion || '')}
+
+        <div class="post-cta">
+          <p style="font-size:14px;color:rgba(33,33,33,.7);margin-bottom:1rem">
+            ¿Buscás iniciar un proceso terapéutico?
+          </p>
+          <a class="btn btn-red" href="consulta.html">Quiero empezar <i class="ti ti-arrow-right"></i></a>
+        </div>
+      </article>
+    </div>`;
+}
+
+
+/**
+ * Convierte el texto de la planilla en HTML.
+ * Soporta: ## títulos, **negrita**, *cursiva*, [link](url),
+ *          > citas, - listas, y párrafos separados por línea en blanco.
+ */
+function formatearTexto(texto) {
+  if (!texto) return '<p>Contenido próximamente.</p>';
+
+  const bloques = String(texto).split(/\n\s*\n/);
+
+  return bloques.map(bloque => {
+    let b = bloque.trim();
+    if (!b) return '';
+
+    // Títulos
+    if (b.startsWith('### ')) return `<h3>${inline(b.slice(4))}</h3>`;
+    if (b.startsWith('## '))  return `<h2>${inline(b.slice(3))}</h2>`;
+    if (b.startsWith('# '))   return `<h2>${inline(b.slice(2))}</h2>`;
+
+    // Cita
+    if (b.startsWith('> ')) {
+      const cita = b.split('\n').map(l => l.replace(/^>\s?/, '')).join(' ');
+      return `<blockquote>${inline(cita)}</blockquote>`;
+    }
+
+    // Lista con viñetas
+    if (/^[-*]\s/.test(b)) {
+      const items = b.split('\n')
+        .filter(l => /^[-*]\s/.test(l.trim()))
+        .map(l => `<li>${inline(l.trim().replace(/^[-*]\s/, ''))}</li>`)
+        .join('');
+      return `<ul>${items}</ul>`;
+    }
+
+    // Lista numerada
+    if (/^\d+[.)]\s/.test(b)) {
+      const items = b.split('\n')
+        .filter(l => /^\d+[.)]\s/.test(l.trim()))
+        .map(l => `<li>${inline(l.trim().replace(/^\d+[.)]\s/, ''))}</li>`)
+        .join('');
+      return `<ol>${items}</ol>`;
+    }
+
+    // Imagen suelta
+    if (/^https?:\/\/\S+\.(jpg|jpeg|png|webp|gif)$/i.test(b)) {
+      return `<img src="${escapeAttr(b)}" alt="" loading="lazy">`;
+    }
+
+    // Párrafo normal (respeta saltos de línea simples)
+    return `<p>${inline(b).replace(/\n/g, '<br>')}</p>`;
+  }).join('');
+}
+
+
+/** Formato dentro de un párrafo: negrita, cursiva, links */
+function inline(txt) {
+  return escapeHtml(txt)
+    .replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g,
+             '<a href="$2" target="_blank" rel="noopener">$1</a>')
+    .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+    .replace(/(^|[^*])\*([^*\n]+)\*(?!\*)/g, '$1<em>$2</em>');
+}
+
+
+function slugify(texto) {
+  return String(texto || '')
+    .toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9\s-]/g, '')
+    .trim()
+    .replace(/\s+/g, '-')
+    .substring(0, 60);
 }
 
 
@@ -192,7 +344,7 @@ async function enviarAPlanilla(tipo, datos) {
       method: 'POST',
       mode: 'no-cors',                       // Apps Script no manda CORS headers
       headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-      body: JSON.stringify({ tipo, ...datos })
+      body: JSON.stringify({ ...datos, tipo })   // tipo va último: ningún campo puede pisarlo
     });
     // Con no-cors no se puede leer la respuesta, asumimos éxito
     return { ok: true };
