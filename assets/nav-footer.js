@@ -1,6 +1,7 @@
 /* nav-footer.js — injects shared nav + footer + WA button */
 
 const NAV_HTML = `
+<header class="header">
 <div class="scroll-progress-bar" id="scrollProgress"></div>
 <nav class="nav" role="navigation" aria-label="Navegación principal">
   <a href="index.html"><img class="nav-logo" src="assets/logos/Logo_Blanco_Amarillo.png" alt="Psi a Todo"></a>
@@ -31,7 +32,8 @@ const NAV_HTML = `
   <a href="novedades.html" onclick="closeMenu()">Novedades</a>
   <a href="contacto.html" onclick="closeMenu()">Contacto</a>
   <a href="consulta.html" class="mob-cta" onclick="closeMenu()">Quiero empezar →</a>
-</div>`;
+</div>
+</header>`;
 
 const FOOTER_HTML = `
 <footer class="footer">
