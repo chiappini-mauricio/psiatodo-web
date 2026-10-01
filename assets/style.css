@@ -130,13 +130,13 @@ body {
   border-bottom-color: rgba(237,189,53,.2);
   height: 58px;
 }
-.nav-logo { height: 17px; width: auto; display: block; flex-shrink: 0; transition: transform .25s ease; }
+.nav-logo { height: 18px; width: auto; display: block; flex-shrink: 0; margin-right: 1.5rem; transition: transform .25s ease; }
 .nav-logo:hover { transform: scale(1.03); }
 
 /* Desktop menu */
 .nav-links {
   display: flex;
-  gap: 2rem;
+  gap: 1.4rem;
   list-style: none;
   align-items: center;
 }
@@ -362,19 +362,21 @@ body {
 .eyebrow {
   display: inline-flex;
   align-items: center;
-  font-size: 10px;
-  letter-spacing: .2em;
+  font-size: 10.5px;
+  letter-spacing: .18em;
   text-transform: uppercase;
-  font-weight: 700;
+  font-weight: 800;
   margin-bottom: 1.25rem;
-  padding: 5px 14px;
+  padding: 6px 16px;
   border-radius: 50px;
   backdrop-filter: blur(10px);
 }
-.eyebrow-yellow { color: var(--yellow); background: rgba(237,189,53,0.12); border: 1px solid rgba(237,189,53,0.3); }
-.eyebrow-red    { color: var(--red); background: rgba(202,87,87,0.12); border: 1px solid rgba(202,87,87,0.3); }
-.eyebrow-muted  { color: rgba(255,247,236,.75); background: rgba(255,247,236,0.06); border: 1px solid rgba(255,247,236,0.15); }
-.eyebrow-dark   { color: rgba(33,33,33,.75); background: rgba(33,33,33,0.06); border: 1px solid rgba(33,33,33,0.15); }
+.eyebrow-yellow { color: #6e4b00; background: rgba(237,189,53,0.22); border: 1px solid rgba(185,135,15,0.45); }
+.sec-dark .eyebrow-yellow, .hero-dark .eyebrow-yellow { color: var(--yellow); background: rgba(237,189,53,0.15); border: 1px solid rgba(237,189,53,0.35); }
+.eyebrow-red    { color: #a82e2e; background: rgba(202,87,87,0.16); border: 1px solid rgba(202,87,87,0.4); }
+.sec-dark .eyebrow-red { color: var(--red); background: rgba(202,87,87,0.18); border: 1px solid rgba(202,87,87,0.35); }
+.eyebrow-muted  { color: rgba(255,247,236,.88); background: rgba(255,247,236,0.1); border: 1px solid rgba(255,247,236,0.2); }
+.eyebrow-dark   { color: #1a1a1a; background: rgba(33,33,33,0.08); border: 1px solid rgba(33,33,33,0.22); }
 
 .h1 { font-family:'Times New Roman',serif; font-size:clamp(2.3rem, 6.5vw, 3.4rem); line-height:1.1; letter-spacing:-.025em; }
 .h2 { font-family:'Times New Roman',serif; font-size:clamp(1.75rem, 4.5vw, 2.4rem); line-height:1.15; letter-spacing:-.02em; margin-bottom:1.1rem; }
@@ -982,4 +984,13 @@ blockquote.testimonial strong { color:var(--yellow); font-style:normal; font-wei
 [data-theme="dark"] .news-filter.active {
   background: var(--yellow) !important;
   color: var(--dark) !important;
+}
+
+/* Mobile interaction polish (prevent fake button appearance) */
+@media (max-width: 768px) {
+  .hero-visual { display: none !important; }
+  .valor-cell:hover, .pillar:hover, .contacto-info-item:hover {
+    transform: none !important;
+    box-shadow: var(--shadow-card) !important;
+  }
 }

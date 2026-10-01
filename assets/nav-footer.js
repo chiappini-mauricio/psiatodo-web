@@ -9,9 +9,9 @@ const NAV_HTML = `
     <li><a href="index.html">Inicio</a></li>
     <li><a href="psi-a-todo.html">Psi a Todo</a></li>
     <li><a href="quienes-somos.html">Quiénes somos</a></li>
-    <li><a href="profesionales.html">Profesionales</a></li>
     <li><a href="faq.html">Preguntas frecuentes</a></li>
     <li><a href="novedades.html">Novedades</a></li>
+    <li><a href="profesionales.html">Profesionales</a></li>
     <li><a href="contacto.html">Contacto</a></li>
     <li><a href="consulta.html" class="nav-cta">Quiero empezar</a></li>
     <li><button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Cambiar tema"><i class="ti ti-moon" id="themeIcon"></i> <span id="themeLabel">Oscuro</span></button></li>
@@ -27,9 +27,9 @@ const NAV_HTML = `
   <a href="index.html" onclick="closeMenu()">Inicio</a>
   <a href="psi-a-todo.html" onclick="closeMenu()">Psi a Todo</a>
   <a href="quienes-somos.html" onclick="closeMenu()">Quiénes somos</a>
-  <a href="profesionales.html" onclick="closeMenu()">Profesionales</a>
   <a href="faq.html" onclick="closeMenu()">Preguntas frecuentes</a>
   <a href="novedades.html" onclick="closeMenu()">Novedades</a>
+  <a href="profesionales.html" onclick="closeMenu()">Profesionales</a>
   <a href="contacto.html" onclick="closeMenu()">Contacto</a>
   <a href="consulta.html" class="mob-cta" onclick="closeMenu()">Quiero empezar →</a>
 </div>
@@ -44,7 +44,7 @@ const FOOTER_HTML = `
         <p class="footer-tagline">
           Acompañamos el inicio de tu proceso terapéutico.<br>
           Derivaciones pensadas con criterio clínico.<br>
-          Atención presencial en CABA (Argentina) y virtual para todo el mundo.
+          Atención presencial en Argentina y virtual para todo el mundo.
         </p>
         <div class="footer-social">
           <a href="https://www.instagram.com/psi.a.todo" target="_blank" rel="noopener" aria-label="Instagram"><i class="ti ti-brand-instagram"></i></a>
@@ -57,9 +57,9 @@ const FOOTER_HTML = `
         <a href="index.html">Inicio</a>
         <a href="psi-a-todo.html">Psi a Todo</a>
         <a href="quienes-somos.html">Quiénes somos</a>
-        <a href="profesionales.html">Profesionales</a>
         <a href="faq.html">Preguntas frecuentes</a>
         <a href="novedades.html">Novedades</a>
+        <a href="profesionales.html">Profesionales</a>
         <a href="contacto.html">Contacto</a>
       </div>
       <div class="footer-col">

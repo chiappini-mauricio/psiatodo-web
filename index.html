@@ -96,6 +96,14 @@
     .valor-cell p  { font-size:13.5px; color: var(--text-muted); line-height:1.65; }
     .valor-cell .tag { display:inline-block; background:rgba(237,189,53,0.18); border: 1px solid rgba(237,189,53,0.4); color:var(--text-main); font-size:9.5px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; padding:3px 10px; border-radius:30px; margin-bottom:.65rem; }
 
+    /* Mobile overrides to avoid fake button appearance */
+    @media(max-width:768px) {
+      .hero-visual { display: none !important; }
+      .valor-cell { pointer-events: none; }
+      .valor-cell:hover { transform: none !important; box-shadow: var(--shadow-card) !important; border-color: var(--border-light, rgba(33,33,33,.08)) !important; }
+      .valor-cell .tag { border-radius: 6px; padding: 2px 8px; }
+    }
+
     /* Cómo funciona Bento Layout */
     .como-grid { display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:start; }
     @media(max-width:768px){ .como-grid{ grid-template-columns:1fr; gap:2.5rem; } }
@@ -126,7 +134,7 @@
           Empezar terapia no siempre es fácil.<br>
           <em>Encontrar al profesional adecuado, tampoco.</em>
         </h1>
-        <a class="btn btn-yellow reveal d2" href="consulta.html">Quiero empezar <i class="ti ti-arrow-right"></i></a>
+        <a class="btn btn-yellow reveal d2" href="consulta.html">Necesito orientación <i class="ti ti-arrow-right"></i></a>
         <p class="body hero-lead reveal d3" style="max-width:440px;margin-top:1.5rem">
           A veces hay dudas, malas experiencias o confusión sobre por dónde y con quién empezar.
           En Psi a Todo acompañamos ese primer momento con escucha, criterio clínico y derivaciones cuidadas.
@@ -200,7 +208,7 @@
       <div class="valor-cell reveal d4">
         <span class="tag">Red supervisada</span>
         <h3>Distintos enfoques y especialidades</h3>
-        <p>Psicoanálisis, TCC, psiquiatría, orientación vocacional y más.</p>
+        <p>Psicoanálisis, cognitiva conductual, psiquiatría, orientación vocacional y más.</p>
       </div>
     </div>
 
@@ -224,7 +232,7 @@
           <span>Nuestra red incluye distintos enfoques y especialidades</span>
         </div>
         <div class="reveal d4" style="margin-top:1.5rem">
-          <a class="btn btn-red" href="consulta.html">Necesito orientación <i class="ti ti-arrow-right"></i></a>
+          <a class="btn btn-red" href="consulta.html">Quiero empezar <i class="ti ti-arrow-right"></i></a>
         </div>
       </div>
       <div class="como-aside reveal d2">

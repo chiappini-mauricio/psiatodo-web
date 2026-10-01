@@ -164,10 +164,13 @@ function renderFiltros(talleres) {
   const cont = document.getElementById('news-filters');
   if (!cont) return;
 
-  const cats = [];
+  const defaultCats = ['Talleres', 'Formación Profesional', 'Artículos'];
+  const cats = [...defaultCats];
   talleres.forEach(t => {
     const c = t.categoria || 'Novedades';
-    if (!cats.includes(c)) cats.push(c);
+    if (!cats.some(existing => existing.toLowerCase() === c.toLowerCase())) {
+      cats.push(c);
+    }
   });
 
   cont.innerHTML =
@@ -183,7 +186,8 @@ function renderFiltros(talleres) {
       btn.classList.add('active');
       const cat = btn.dataset.filter;
       items.forEach(el => {
-        el.style.display = (cat === 'all' || el.dataset.cat === cat) ? '' : 'none';
+        const itemCat = el.dataset.cat || '';
+        el.style.display = (cat === 'all' || itemCat === cat || itemCat.includes(cat) || cat.includes(itemCat)) ? '' : 'none';
       });
     });
   });
