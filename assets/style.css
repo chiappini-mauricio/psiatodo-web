@@ -245,12 +245,11 @@ body {
   background-position: center center;
   background-repeat: no-repeat;
   color: var(--dark);
-  padding: 3.8rem var(--pad) 3.5rem;
+  padding: 3.8rem 0 3.5rem;
   position: relative;
   overflow: hidden;
   transition: background .35s ease, color .35s ease;
 }
-.hero { padding: 3.8rem 0 3.5rem; }
 .hero-inner, .page-hero-inner { max-width: var(--max); margin: 0 auto; position: relative; z-index: 2; }
 .hero-inner { max-width: 1080px; padding: 0 var(--pad); }
 
@@ -825,6 +824,15 @@ blockquote.testimonial strong { color:var(--yellow); font-style:normal; font-wei
 }
 
 /* ─── UNIFIED PAGE HEROES ─── */
+.page-hero-inner {
+  width: 100%;
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 24px;
+  padding-right: 24px;
+  box-sizing: border-box;
+}
 .page-hero .hero-title {
   max-width: 640px;
   margin-bottom: 0;
