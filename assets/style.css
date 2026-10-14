@@ -343,7 +343,6 @@ body {
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .hero-title, .page-hero .h1 {
   text-wrap: balance;
-  text-wrap: pretty;
 }
 p, .lead, .hero-lead, .body {
   text-wrap: pretty;
@@ -824,3 +823,25 @@ blockquote.testimonial strong { color:var(--yellow); font-style:normal; font-wei
     margin: 0 !important;
   }
 }
+
+/* ─── UNIFIED PAGE HEROES ─── */
+.page-hero .hero-title {
+  max-width: 640px;
+  margin-bottom: 0;
+  text-wrap: balance;
+}
+.page-hero .hero-lead {
+  max-width: 520px;
+  margin-top: 1rem;
+  font-size: 15px;
+  line-height: 1.7;
+}
+@media (min-width: 900px) {
+  .page-hero {
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
