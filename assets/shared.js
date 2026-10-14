@@ -1,37 +1,8 @@
-/* ── Theme Toggle (Light / Dark mode) ── */
-function applyTheme(theme) {
-  document.documentElement.setAttribute('data-theme', theme);
-  localStorage.setItem('psiatodo-theme', theme);
-
-  const icon = document.getElementById('themeIcon');
-  const iconMob = document.getElementById('themeIconMob');
-  const label = document.getElementById('themeLabel');
-  const logo = document.querySelector('.nav-logo');
-
-  if (logo) logo.src = 'assets/logos/Logo_Blanco_Amarillo.png';
-
-  if (theme === 'dark') {
-    if (icon) icon.className = 'ti ti-sun';
-    if (iconMob) iconMob.className = 'ti ti-sun';
-    if (label) label.textContent = 'Claro';
-  } else {
-    if (icon) icon.className = 'ti ti-moon';
-    if (iconMob) iconMob.className = 'ti ti-moon';
-    if (label) label.textContent = 'Oscuro';
-  }
-}
-
-function toggleTheme() {
-  const current = document.documentElement.getAttribute('data-theme') || 'light';
-  const next = current === 'dark' ? 'light' : 'dark';
-  applyTheme(next);
-}
-
-function initTheme() {
-  const saved = localStorage.getItem('psiatodo-theme') || 'light';
-  applyTheme(saved);
-}
-initTheme();
+/* ── Theme cleanup: Ensure default light palette across all sessions ── */
+try {
+  localStorage.removeItem('psiatodo-theme');
+  document.documentElement.removeAttribute('data-theme');
+} catch (e) {}
 
 /* ── Scroll progress bar & Nav scroll effect ── */
 window.addEventListener('scroll', () => {

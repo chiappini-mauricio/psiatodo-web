@@ -14,14 +14,10 @@ const NAV_HTML = `
     <li><a href="profesionales.html">Profesionales</a></li>
     <li><a href="contacto.html">Contacto</a></li>
     <li><a href="consulta.html" class="nav-cta">Quiero empezar</a></li>
-    <li><button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Cambiar tema"><i class="ti ti-moon" id="themeIcon"></i> <span id="themeLabel">Oscuro</span></button></li>
   </ul>
-  <div style="display:flex;align-items:center;gap:12px">
-    <button class="theme-toggle mob-theme-btn" onclick="toggleTheme()" aria-label="Cambiar tema"><i class="ti ti-moon" id="themeIconMob"></i></button>
-    <button class="burger" id="burger" aria-label="Abrir menú" aria-expanded="false" onclick="toggleMenu()">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
+  <button class="burger" id="burger" aria-label="Abrir menú" aria-expanded="false" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 <div class="mob-menu" id="mobMenu" role="dialog" aria-label="Menú de navegación">
   <a href="index.html" onclick="closeMenu()">Inicio</a>
