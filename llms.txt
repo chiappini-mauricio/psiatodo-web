@@ -37,3 +37,4 @@
 - [Preguntas Frecuentes](https://psiatodo.com/faq.html): Respuestas a dudas sobre costos, modalidades y confidencialidad.
 - [Novedades](https://psiatodo.com/novedades.html): Artículos y reflexiones clínicas.
 - [Contacto](https://psiatodo.com/contacto.html): Canales directos de comunicación.
+- [Política de Privacidad](https://psiatodo.com/privacidad.html): Marco ético, secreto profesional y protección de datos (Ley 25.326).

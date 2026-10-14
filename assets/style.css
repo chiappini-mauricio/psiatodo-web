@@ -995,11 +995,66 @@ blockquote.testimonial strong { color:var(--yellow); font-style:normal; font-wei
   color: var(--dark) !important;
 }
 
-/* Mobile interaction polish (prevent fake button appearance) */
+/* Mobile interaction polish (prevent fake button appearance & editorial list for valor cells) */
 @media (max-width: 768px) {
   .hero-visual { display: none !important; }
-  .valor-cell:hover, .pillar:hover, .contacto-info-item:hover {
+  .pillar:hover, .contacto-info-item:hover {
     transform: none !important;
     box-shadow: var(--shadow-card) !important;
+  }
+  .valor-grid {
+    grid-template-columns: 1fr !important;
+    gap: 0 !important;
+  }
+  .valor-cell,
+  [data-theme="dark"] .valor-cell {
+    background: transparent !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    padding: 20px 0 !important;
+    border-top: 1px solid rgba(255, 247, 236, 0.12) !important;
+    pointer-events: none;
+  }
+  .valor-cell:first-child,
+  [data-theme="dark"] .valor-cell:first-child {
+    border-top: 0 !important;
+    padding-top: 0.5rem !important;
+  }
+  .valor-cell:hover {
+    transform: none !important;
+    box-shadow: none !important;
+    border-color: transparent !important;
+  }
+  .valor-cell .tag,
+  .valor-cell .eyebrow,
+  [data-theme="dark"] .valor-cell .tag,
+  [data-theme="dark"] .valor-cell .eyebrow {
+    background: none !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    color: #EDBD35 !important;
+    font-size: 11px !important;
+    letter-spacing: .14em !important;
+    text-transform: uppercase !important;
+    font-weight: 800 !important;
+    display: inline-block !important;
+    margin-bottom: .45rem !important;
+  }
+  .valor-cell h3,
+  [data-theme="dark"] .valor-cell h3 {
+    color: var(--cream) !important;
+    font-family: 'Times New Roman', serif !important;
+    font-size: 1.15rem !important;
+    margin-bottom: .45rem !important;
+    line-height: 1.35 !important;
+  }
+  .valor-cell p,
+  [data-theme="dark"] .valor-cell p {
+    color: rgba(255, 247, 236, 0.7) !important;
+    font-size: 14px !important;
+    line-height: 1.7 !important;
+    margin: 0 !important;
   }
 }

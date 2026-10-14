@@ -101,9 +101,9 @@ function renderTalleres() {
   const lista = document.getElementById('news-list');
   if (!lista) return;
 
-  const talleres = SITE.data.talleres || [];
+  const rawTalleres = SITE.data.talleres || [];
 
-  if (!talleres.length) {
+  if (!rawTalleres.length) {
     lista.innerHTML = `
       <div style="text-align:center;padding:3rem 1.5rem">
         <p style="color:rgba(33,33,33,.55)">Próximamente publicaremos nuevas propuestas.</p>
@@ -111,9 +111,68 @@ function renderTalleres() {
     return;
   }
 
+  // Normalizar talleres y asignar categorías canónicas
+  const talleres = rawTalleres.map(t => {
+    let titulo = (t.titulo || '').trim();
+    // Corregir falta de tilde en Clínica de la Psicosis Ordinaria
+    titulo = titulo.replace(/\bClinica\b/g, 'Clínica');
+
+    let cat = (t.categoria || '').trim();
+    let mod = (t.modalidad || '').trim();
+    let filterSlugs = [];
+
+    const lowerTit = titulo.toLowerCase();
+    const lowerCat = cat.toLowerCase();
+    const lowerMod = mod.toLowerCase();
+
+    // Detección de artículo
+    const isArticulo = lowerCat.includes('artículo') || lowerCat.includes('articulo') ||
+                       lowerMod.includes('artículo') || lowerMod.includes('articulo') ||
+                       lowerCat.includes('psicoanálisis') || lowerCat.includes('psicoanalisis') ||
+                       lowerCat.includes('acompañamiento') || lowerCat.includes('acompanamiento') ||
+                       lowerTit.includes('decisión de empezar') || lowerTit.includes('decision de empezar') ||
+                       lowerTit.includes('padecimiento subjetivo') || lowerTit.includes('no hay recetas');
+
+    // Detección de taller
+    const isTaller = lowerCat.includes('taller') || lowerTit.includes('taller') ||
+                     lowerTit.includes('psicosis ordinaria') || lowerTit.includes('pensar la práctica');
+
+    // Detección de formación profesional
+    const isFormacion = lowerCat.includes('formaci') || lowerCat.includes('profesional') ||
+                        lowerTit.includes('psicosis ordinaria') || lowerTit.includes('pensar la práctica') ||
+                        lowerTit.includes('interpretación en freud') || lowerTit.includes('interpretacion en freud');
+
+    if (isArticulo) {
+      filterSlugs.push('articulos');
+      if (!cat || cat === 'Psicoanálisis' || cat === 'Clínica' || cat === 'Acompañamiento') {
+        cat = 'Artículo';
+      }
+    }
+    if (isTaller) {
+      filterSlugs.push('talleres');
+      if (!cat) cat = 'Taller';
+    }
+    if (isFormacion) {
+      filterSlugs.push('formacion-profesional');
+      if (!cat || cat === 'Taller') {
+        // mantener categoría o etiquetarlo claramente
+      }
+    }
+
+    if (filterSlugs.length === 0) {
+      filterSlugs.push('talleres');
+      if (!cat) cat = 'Taller';
+    }
+
+    return {
+      ...t,
+      titulo,
+      categoria: cat,
+      filterSlugs
+    };
+  });
+
   lista.innerHTML = talleres.map((t, i) => {
-    const cat  = t.categoria || 'Novedades';
-    const slug = slugify(cat);
     const meta = [t.fecha, t.modalidad].filter(Boolean).join(' · ');
     const tieneNota = !!(t.contenido && t.contenido.trim());
 
@@ -127,21 +186,21 @@ function renderTalleres() {
       label = 'Ver más';
     } else if (tieneNota) {
       href = 'novedad.html?post=' + encodeURIComponent(t.slug || slugify(t.titulo));
-      label = /art[ií]culo/i.test(t.modalidad || '') ? 'Leer artículo' : 'Ver más';
+      label = (/art[ií]culo/i.test(t.modalidad || '') || t.filterSlugs.includes('articulos')) ? 'Leer artículo' : 'Ver más';
     }
 
     // Miniatura: imagen real o placeholder con forma de marca
     const forma = ['25','22','21','2','9'][i % 5];
     const thumb = t.imagen && t.imagen.trim()
       ? `<img class="news-thumb" src="${escapeAttr(t.imagen)}" alt="" loading="lazy"
-             onerror="this.outerHTML='<div class=\'news-thumb-ph\'><img src=\'assets/formas/${forma}.png\' alt=\'\'></div>'">`
+             onerror="this.outerHTML='<div class=\\'news-thumb-ph\\'><img src=\\'assets/formas/${forma}.png\\' alt=\\'\\'></div>'">`
       : `<div class="news-thumb-ph"><img src="assets/formas/${forma}.png" alt=""></div>`;
 
     return `
-      <a class="news-item reveal ${i % 2 ? 'd2' : 'd1'}" data-cat="${slug}" href="${escapeAttr(href)}"${target}>
+      <a class="news-item reveal ${i % 2 ? 'd2' : 'd1'}" data-cats="${t.filterSlugs.join(' ')}" href="${escapeAttr(href)}"${target}>
         <div>${thumb}</div>
         <div class="news-body">
-          <span class="news-tag">${escapeHtml(cat)}</span>
+          <span class="news-tag">${escapeHtml(t.categoria)}</span>
           <h3>${escapeHtml(t.titulo)}</h3>
           ${t.descripcion ? `<p>${escapeHtml(t.descripcion)}</p>` : ''}
           ${meta ? `<span class="news-meta">${escapeHtml(meta)}</span>` : ''}
@@ -150,7 +209,7 @@ function renderTalleres() {
       </a>`;
   }).join('');
 
-  renderFiltros(talleres);
+  renderFiltros();
 
   if (typeof revealObs !== 'undefined') {
     lista.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
@@ -160,25 +219,23 @@ function renderTalleres() {
 }
 
 
-function renderFiltros(talleres) {
+function renderFiltros() {
   const cont = document.getElementById('news-filters');
   if (!cont) return;
 
-  const defaultCats = ['Talleres', 'Formación Profesional', 'Artículos'];
-  const cats = [...defaultCats];
-  talleres.forEach(t => {
-    const c = t.categoria || 'Novedades';
-    if (!cats.some(existing => existing.toLowerCase() === c.toLowerCase())) {
-      cats.push(c);
-    }
-  });
+  const tabs = [
+    { label: 'Todos', slug: 'all' },
+    { label: 'Talleres', slug: 'talleres' },
+    { label: 'Formación Profesional', slug: 'formacion-profesional' },
+    { label: 'Artículos', slug: 'articulos' }
+  ];
 
-  cont.innerHTML =
-    `<button class="news-filter active" data-filter="all">Todos</button>` +
-    cats.map(c => `<button class="news-filter" data-filter="${slugify(c)}">${escapeHtml(c)}</button>`).join('');
+  cont.innerHTML = tabs.map((tab, idx) => 
+    `<button class="news-filter ${idx === 0 ? 'active' : ''}" data-filter="${tab.slug}">${tab.label}</button>`
+  ).join('');
 
   const filtros = cont.querySelectorAll('.news-filter');
-  const items   = document.querySelectorAll('.news-item[data-cat]');
+  const items   = document.querySelectorAll('.news-item');
 
   filtros.forEach(btn => {
     btn.addEventListener('click', () => {
@@ -186,8 +243,8 @@ function renderFiltros(talleres) {
       btn.classList.add('active');
       const cat = btn.dataset.filter;
       items.forEach(el => {
-        const itemCat = el.dataset.cat || '';
-        el.style.display = (cat === 'all' || itemCat === cat || itemCat.includes(cat) || cat.includes(itemCat)) ? '' : 'none';
+        const itemSlugs = (el.dataset.cats || '').split(' ');
+        el.style.display = (cat === 'all' || itemSlugs.includes(cat)) ? '' : 'none';
       });
     });
   });
@@ -225,7 +282,8 @@ function renderNota() {
     return;
   }
 
-  document.title = nota.titulo + ' | Psi a Todo';
+  const tituloNota = (nota.titulo || '').replace(/\bClinica\b/g, 'Clínica');
+  document.title = tituloNota + ' | Psi a Todo';
 
   const meta = [nota.fecha, nota.modalidad].filter(Boolean).join(' · ');
 
@@ -234,7 +292,7 @@ function renderNota() {
       <div class="post-hero-inner">
         <a class="post-back" href="novedades.html"><i class="ti ti-arrow-left"></i> Volver a novedades</a>
         <span class="post-tag">${escapeHtml(nota.categoria || 'Novedades')}</span>
-        <h1 class="post-title">${escapeHtml(nota.titulo)}</h1>
+        <h1 class="post-title">${escapeHtml(tituloNota)}</h1>
         ${meta ? `<p class="post-meta">${escapeHtml(meta)}</p>` : ''}
       </div>
     </section>

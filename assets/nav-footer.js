@@ -72,7 +72,7 @@ const FOOTER_HTML = `
     </div>
     <div class="footer-bottom">
       <span>© 2026 Psi a Todo. Todos los derechos reservados.</span>
-      <a href="#">Política de privacidad</a>
+      <a href="privacidad.html">Política de privacidad</a>
     </div>
   </div>
 </footer>

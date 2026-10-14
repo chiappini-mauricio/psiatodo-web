@@ -96,12 +96,58 @@
     .valor-cell p  { font-size:13.5px; color: var(--text-muted); line-height:1.65; }
     .valor-cell .tag { display:inline-block; background:rgba(237,189,53,0.18); border: 1px solid rgba(237,189,53,0.4); color:var(--text-main); font-size:9.5px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; padding:3px 10px; border-radius:30px; margin-bottom:.65rem; }
 
-    /* Mobile overrides to avoid fake button appearance */
-    @media(max-width:768px) {
+    /* Mobile overrides: editorial list for propuesta de valor */
+    @media (max-width: 768px) {
       .hero-visual { display: none !important; }
-      .valor-cell { pointer-events: none; }
-      .valor-cell:hover { transform: none !important; box-shadow: var(--shadow-card) !important; border-color: var(--border-light, rgba(33,33,33,.08)) !important; }
-      .valor-cell .tag { border-radius: 6px; padding: 2px 8px; }
+      .valor-grid {
+        grid-template-columns: 1fr !important;
+        gap: 0 !important;
+      }
+      .valor-cell {
+        background: transparent !important;
+        border: 0 !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        padding: 20px 0 !important;
+        border-top: 1px solid rgba(255, 247, 236, 0.12) !important;
+        pointer-events: none;
+      }
+      .valor-cell:first-child {
+        border-top: 0 !important;
+        padding-top: 0.5rem !important;
+      }
+      .valor-cell:hover {
+        transform: none !important;
+        box-shadow: none !important;
+        border-color: transparent !important;
+      }
+      .valor-cell .tag,
+      .valor-cell .eyebrow {
+        background: none !important;
+        border: 0 !important;
+        border-radius: 0 !important;
+        padding: 0 !important;
+        color: #EDBD35 !important;
+        font-size: 11px !important;
+        letter-spacing: .14em !important;
+        text-transform: uppercase !important;
+        font-weight: 800 !important;
+        display: inline-block !important;
+        margin-bottom: .45rem !important;
+      }
+      .valor-cell h3 {
+        color: var(--cream) !important;
+        font-family: 'Times New Roman', serif !important;
+        font-size: 1.15rem !important;
+        margin-bottom: .45rem !important;
+        line-height: 1.35 !important;
+      }
+      .valor-cell p {
+        color: rgba(255, 247, 236, 0.7) !important;
+        font-size: 14px !important;
+        line-height: 1.7 !important;
+        margin: 0 !important;
+      }
     }
 
     /* Cómo funciona Bento Layout */

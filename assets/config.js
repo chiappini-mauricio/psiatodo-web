@@ -32,7 +32,29 @@ const DEFAULTS = {
   },
   talleres: [
     {
-      categoria: 'Taller',
+      categoria: 'Talleres',
+      titulo: 'Clínica de la Psicosis Ordinaria',
+      descripcion: '¿Es la psicosis su desencadenamiento? No lo creemos. La estructura psicótica es mucho más que su expresión extraordinaria en los fenómenos elementales.',
+      fecha: 'Septiembre 2026',
+      modalidad: 'Virtual',
+      imagen: 'https://i.postimg.cc/JhSJZRHx/Captura-de-pantalla-2026-08-06-032601.png',
+      contenido: '¿Es la psicosis su desencadenamiento?\n\nNo lo creemos. La estructura psicótica es mucho más que su expresión extraordinaria en los fenómenos elementales.\n\nNos interesa pensar la clínica allí donde la psicosis no se presenta bajo la forma del brote, sino cuando la estructura opera a partir de otro anudamiento, sosteniendo arreglos singulares que no pasan por la descompensación clásica.',
+      link: '',
+      slug: 'clinica-de-la-psicosis-ordinaria'
+    },
+    {
+      categoria: 'Artículos',
+      titulo: 'La decisión de empezar terapia',
+      descripcion: 'Solemos vivir sin pensar mucho en nosotros mismos, ocupados por las tareas de la vida cotidiana y las personas que nos rodean, son cada vez menos los momentos en los que nos detenemos a reflexionar.',
+      fecha: 'Junio 2026',
+      modalidad: 'Artículo',
+      imagen: 'https://static.wixstatic.com/media/c3309b_3210190f67834d48bd6d75e1d8d323e0~mv2.jpg/v1/fill/w_454,h_341,fp_0.50_0.50,q_90,enc_avif,quality_auto/c3309b_3210190f67834d48bd6d75e1d8d323e0~mv2.jpg',
+      contenido: 'Solemos vivir sin pensar mucho en nosotros mismos, ocupados por las tareas de la vida cotidiana y las personas que nos rodean, son cada vez menos los momentos en los que nos detenemos a reflexionar.\n\nLa decisión de empezar terapia nunca es fácil y casi siempre viene acompañada de un periodo de mucha postergación. Entre darnos cuenta que algo viene mal y animarnos a consultar suele transcurrir mucho tiempo.',
+      link: '',
+      slug: 'la-decision-de-empezar-terapia'
+    },
+    {
+      categoria: 'Formación Profesional',
       titulo: 'Pensar la práctica clínica: ¿pensamos o repetimos?',
       descripcion: 'Un espacio para incomodarnos un poco. Para cuestionar lo heredado y salir de posiciones tomadas sin haberlas interrogado.',
       fecha: 'Mayo 2026',
@@ -43,7 +65,7 @@ const DEFAULTS = {
       slug: 'pensar-la-practica-clinica-pensamos-o-repetimos'
     },
     {
-      categoria: 'Psicoanálisis',
+      categoria: 'Formación Profesional',
       titulo: 'La interpretación en Freud y la tradición postfreudiana',
       descripcion: 'Hacer consciente lo inconsciente: insight, elaboración y simbolización. La intervención en Lacan: el equívoco, el corte y la conmoción del sentido.',
       fecha: 'Junio 2026',
@@ -54,7 +76,7 @@ const DEFAULTS = {
       slug: 'la-interpretacion-en-freud-y-la-tradicion-postfreud'
     },
     {
-      categoria: 'Clínica',
+      categoria: 'Artículos',
       titulo: 'Acompañar el padecimiento subjetivo',
       descripcion: 'Alojar aquello que duele, escuchar sin apurar sentidos y sostener un espacio donde el malestar pueda ser dicho, pensado y trabajado.',
       fecha: '2026',
@@ -63,17 +85,6 @@ const DEFAULTS = {
       contenido: 'Acompañar el padecimiento subjetivo supone alojar aquello que duele, escuchar sin apurar sentidos y sostener un espacio donde el malestar pueda ser dicho, pensado y trabajado en su singularidad.\n\nNo todo malestar puede ser nombrado rápido ni resuelto con una indicación. Algunas experiencias necesitan tiempo, presencia y un espacio donde decirse.',
       link: '',
       slug: 'acompanar-el-padecimiento-subjetivo'
-    },
-    {
-      categoria: 'Acompañamiento',
-      titulo: 'No hay recetas. Hay preguntas.',
-      descripcion: 'Y un espacio donde pensarlas con otros y otras. Reflexiones sobre la derivación cuidada y el acompañamiento clínico.',
-      fecha: '2026',
-      modalidad: 'Artículo',
-      imagen: '',
-      contenido: 'Cuando alguien busca terapia, muchas veces lo que encuentra es un listado. Nombres, especialidades, precios.\n\nPero elegir con quién trabajar el propio padecimiento no debería ser una decisión al azar.\n\n## Una derivación es una decisión clínica\n\nLeer cada consulta antes de derivarla no es un trámite: es parte del trabajo. Es lo que hace que un proceso pueda empezar en las mejores condiciones y sostenerse en el tiempo.',
-      link: '',
-      slug: 'no-hay-recetas-hay-preguntas'
     }
   ]
 };
