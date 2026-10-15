@@ -853,3 +853,13 @@ blockquote.testimonial strong { color:var(--yellow); font-style:normal; font-wei
   }
 }
 
+/* Hero title italic emphasis in brand red */
+.hero-title em,
+.hero .hero-title em,
+.page-hero .hero-title em,
+.page-hero .h1 em {
+  font-style: italic;
+  color: #ca5757;
+  text-shadow: none;
+}
+
