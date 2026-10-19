@@ -275,15 +275,33 @@ function actualizarPlaceholderHonorarios() {
   const honorariosInput = document.getElementById('honorarios');
   if (!honorariosInput) return;
 
-  let minAr = (cfg.tarifa_minima_ar || cfg.precio_minimo || '$30.000').trim();
-  let minEu = (cfg.tarifa_minima_eu || '40€').trim();
-  let minUsd = (cfg.tarifa_minima_usd || '25USD').trim();
+  let minAr = String(cfg.tarifa_minima_ar || cfg.precio_minimo || '$30.000').trim();
+  let minEu = String(cfg.tarifa_minima_eu || '35€').trim();
+  let minUsd = String(cfg.tarifa_minima_usd || '25USD').trim();
 
-  // Normalizar si Sheets aplicó formato con decimales (ej: $30,000.00 -> $30.000)
-  minAr = minAr.replace(/[,.]00$/, '').replace(/,(\d{3})/g, '.$1');
-  if (/^\d/.test(minAr)) minAr = '$' + minAr;
+  // Formato Argentina: ej. 30000 -> $30.000
+  const numAr = parseInt(minAr.replace(/[^\d]/g, ''), 10);
+  if (!isNaN(numAr) && numAr > 0) {
+    minAr = '$' + numAr.toLocaleString('es-AR');
+  } else if (!minAr.startsWith('$')) {
+    minAr = '$' + minAr;
+  }
+
+  // Formato Europa: ej. 35 -> 35€
   minEu = minEu.replace(/[,.]00$/, '');
+  if (/^\d+$/.test(minEu)) {
+    minEu = minEu + '€';
+  } else if (!minEu.includes('€') && !/eur/i.test(minEu)) {
+    minEu = minEu + '€';
+  }
+
+  // Formato Resto del mundo: ej. 25 -> 25USD
   minUsd = minUsd.replace(/[,.]00$/, '');
+  if (/^\d+$/.test(minUsd)) {
+    minUsd = minUsd + 'USD';
+  } else if (!/usd/i.test(minUsd) && !minUsd.startsWith('$')) {
+    minUsd = minUsd + 'USD';
+  }
 
   if (!pais) {
     honorariosInput.placeholder = `La tarifa mínima en Argentina es ${minAr} por sesión.`;

@@ -66,7 +66,7 @@ function leerConfig(ss) {
   var hoja = ss.getSheetByName('Config');
   if (!hoja) return {};
 
-  var filas = hoja.getDataRange().getValues();
+  var filas = hoja.getDataRange().getDisplayValues();
   var config = {};
 
   // Empieza en 1 para saltear la fila de encabezados
@@ -253,7 +253,7 @@ function crearEstructuraInicial() {
   config.getRange('A1:C1').setValues([['Clave', 'Valor', 'Dónde aparece']]);
   config.getRange('A2:C7').setValues([
     ['tarifa_minima_ar',     '$30.000',  'Tarifa mínima Argentina'],
-    ['tarifa_minima_eu',     '40€',      'Tarifa mínima Europa'],
+    ['tarifa_minima_eu',     '35€',      'Tarifa mínima Europa'],
     ['tarifa_minima_usd',    '25USD',    'Tarifa mínima Resto del mundo'],
     ['whatsapp',             '5491140463306', 'Botón flotante + links'],
     ['email',                'info@psiatodo.com', 'Footer + contacto'],

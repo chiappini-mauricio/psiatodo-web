@@ -28,7 +28,8 @@ async function cargarContenido() {
   }
 
   try {
-    const res = await fetch(SHEETS_URL, { redirect: 'follow' });
+    const fetchUrl = SHEETS_URL + (SHEETS_URL.includes('?') ? '&' : '?') + '_t=' + Date.now();
+    const res = await fetch(fetchUrl, { redirect: 'follow', cache: 'no-store' });
     const json = await res.json();
 
     if (json.ok) {

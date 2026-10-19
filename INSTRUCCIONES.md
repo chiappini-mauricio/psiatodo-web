@@ -72,14 +72,14 @@ Listo. En 30 segundos el sitio está leyendo de la planilla.
 1. Abrí la planilla → pestaña **Config**
 2. Podés editar el monto mínimo para cada región:
    - `tarifa_minima_ar`: tarifa mínima para Argentina (ej: `$30.000`)
-   - `tarifa_minima_eu`: tarifa mínima para Europa (ej: `40€`)
+   - `tarifa_minima_eu`: tarifa mínima para Europa (ej: `35€`)
    - `tarifa_minima_usd`: tarifa mínima para Resto del mundo (ej: `25USD`)
-3. Listo — el campo de honorarios en el formulario adapta automáticamente el mensaje según el país de la persona (ej: *"La tarifa mínima en España es de 40€ por sesión."*).
+3. Listo — el campo de honorarios en el formulario adapta automáticamente el mensaje según el país de la persona (ej: *"La tarifa mínima en España es de 35€ por sesión."*).
 
 | Clave | Valor de ejemplo | Dónde aparece |
 |---|---|---|
 | `tarifa_minima_ar` | `$30.000` | Placeholder en formulario (Argentina) |
-| `tarifa_minima_eu` | `40€` | Placeholder en formulario (Europa) |
+| `tarifa_minima_eu` | `35€` | Placeholder en formulario (Europa) |
 | `tarifa_minima_usd` | `25USD` | Placeholder en formulario (Resto del mundo) |
 | `whatsapp` | `5491140463306` | Botón flotante |
 | `email` | `info@psiatodo.com` | Footer y contacto |

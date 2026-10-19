@@ -26,7 +26,7 @@ const DEFAULTS = {
   config: {
     precio_minimo:        '$30.000',
     tarifa_minima_ar:     '$30.000',
-    tarifa_minima_eu:     '40€',
+    tarifa_minima_eu:     '35€',
     tarifa_minima_usd:    '25USD',
     precio_texto:         'La tarifa mínima en Argentina es $30.000 por sesión.',
     whatsapp:             '5491140463306',
