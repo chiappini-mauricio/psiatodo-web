@@ -90,6 +90,11 @@ function aplicarContenido() {
 
   // ── Nota individual (novedad.html) ──
   renderNota();
+
+  // ── Actualizar opciones de honorarios si el formulario está presente ──
+  if (typeof window.actualizarHonorariosConfig === 'function') {
+    try { window.actualizarHonorariosConfig(); } catch (e) { console.error(e); }
+  }
 }
 
 

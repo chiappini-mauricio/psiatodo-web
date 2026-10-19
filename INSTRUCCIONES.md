@@ -67,17 +67,20 @@ Listo. En 30 segundos el sitio está leyendo de la planilla.
 
 ## Parte 2 — Uso diario
 
-### Cambiar el precio mínimo
+### Cambiar las tarifas mínimas por región
 
 1. Abrí la planilla → pestaña **Config**
-2. Buscá la fila `precio_minimo` y cambiá el valor de la columna B
-3. Buscá también `precio_texto` y actualizá la frase completa
-4. Listo — el sitio se actualiza solo, sin hacer nada más
+2. Podés editar el monto mínimo para cada región:
+   - `tarifa_minima_ar`: tarifa mínima para Argentina (ej: `$30.000`)
+   - `tarifa_minima_eu`: tarifa mínima para Europa (ej: `40€`)
+   - `tarifa_minima_usd`: tarifa mínima para Resto del mundo (ej: `25USD`)
+3. Listo — el campo de honorarios en el formulario adapta automáticamente el mensaje según el país de la persona (ej: *"La tarifa mínima en España es de 40€ por sesión."*).
 
 | Clave | Valor de ejemplo | Dónde aparece |
 |---|---|---|
-| `precio_minimo` | `$25.000` | FAQ |
-| `precio_texto` | `La tarifa mínima en Argentina es $25.000 por sesión.` | Formulario de consulta |
+| `tarifa_minima_ar` | `$30.000` | Placeholder en formulario (Argentina) |
+| `tarifa_minima_eu` | `40€` | Placeholder en formulario (Europa) |
+| `tarifa_minima_usd` | `25USD` | Placeholder en formulario (Resto del mundo) |
 | `whatsapp` | `5491140463306` | Botón flotante |
 | `email` | `info@psiatodo.com` | Footer y contacto |
 | `tiempo_respuesta` | `24 horas hábiles` | Varios lugares |
@@ -178,7 +181,7 @@ Las tres pestañas se llenan solas:
 - **Contacto** → formulario de la página de contacto
 - **Postulaciones** → profesionales que quieren sumarse
 
-Cada fila incluye la fecha y hora automáticamente.
+Cada fila incluye la fecha y hora automáticamente. En **Consultas** se guardan además la columna `moneda` (`ARS`, `EUR`, `USD`) y `arancel_diferenciado` (`SI` o `NO` según si eligió la opción "Menos de..."), para identificar y filtrar casos al instante.
 
 **Consejo:** podés usar los filtros de Google Sheets para marcar cuáles
 ya contactaste. Agregá una columna al final llamada `Estado` y usá

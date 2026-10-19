@@ -131,7 +131,26 @@
       <label class="fl" for="email" style="margin-top:.75rem">Email *</label>
       <input class="fi" type="email" id="email" name="email" placeholder="tu@email.com" autocomplete="email" required>
       <div class="fi-row" style="margin-top:.75rem">
-        <div><label class="fl" for="pais">País de residencia *</label><input class="fi" type="text" id="pais" name="pais" placeholder="Argentina" required></div>
+        <div>
+          <label class="fl" for="pais">País de residencia *</label>
+          <input class="fi" type="text" id="pais" name="pais" placeholder="Argentina" list="lista-paises" autocomplete="country-name" required>
+          <datalist id="lista-paises">
+            <option value="Argentina">
+            <option value="España">
+            <option value="Uruguay">
+            <option value="Chile">
+            <option value="México">
+            <option value="Colombia">
+            <option value="Estados Unidos">
+            <option value="Alemania">
+            <option value="Francia">
+            <option value="Italia">
+            <option value="Reino Unido">
+            <option value="Perú">
+            <option value="Brasil">
+            <option value="Canadá">
+          </datalist>
+        </div>
         <div><label class="fl" for="nac">Nacionalidad</label><input class="fi" type="text" id="nac" name="nacionalidad" placeholder="Argentina"></div>
       </div>
       <button class="fbtn" onclick="goStep(2)" type="button">Siguiente <i class="ti ti-arrow-right"></i></button>
@@ -184,7 +203,9 @@
         <option>+50 años</option>
       </select>
       <label class="fl" for="honorarios" style="margin-top:.75rem">¿Cuál es tu posibilidad de honorarios por sesión?</label>
-      <input class="fi" type="text" id="honorarios" name="honorarios" data-sheet-placeholder="precio_texto" placeholder="Esta info nos permite orientarte hacia el profesional adecuado.">
+      <input class="fi" type="text" id="honorarios" name="honorarios" placeholder="La tarifa mínima en Argentina es $30.000 por sesión.">
+      <input type="hidden" id="moneda" name="moneda" value="ARS">
+
       <p style="font-size:11.5px;color:rgba(33,33,33,.5);margin-top:.5rem;line-height:1.5">La orientación de Psi a Todo es sin costo. Solo abonás las sesiones con tu terapeuta una vez que empezás.</p>
       <button class="fbtn" onclick="submitForm()" type="button">Enviar consulta <i class="ti ti-send"></i></button>
       <button class="fbtn-back" onclick="goStep(2)" type="button">← Volver</button>
@@ -207,8 +228,121 @@
 <script src="assets/shared.js"></script>
 <script src="assets/sheets.js"></script>
 <script>
+// Detección y normalización de región
+function detectarRegion(pais) {
+  if (!pais) return 'argentina';
+  const p = pais.toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    .trim();
+
+  if (p === 'argentina' || p === 'ar' || p.includes('buenos aires') || p.includes('caba') || p.includes('cordoba') || p.includes('rosario')) {
+    return 'argentina';
+  }
+
+  const paisesEuropa = [
+    'espana', 'spain', 'italia', 'italy', 'francia', 'france', 'alemania', 'germany',
+    'portugal', 'reino unido', 'uk', 'united kingdom', 'inglaterra', 'england',
+    'irlanda', 'ireland', 'paises bajos', 'holanda', 'netherlands', 'belgica', 'belgium',
+    'suiza', 'switzerland', 'austria', 'suecia', 'sweden', 'noruega', 'norway',
+    'dinamarca', 'denmark', 'finlandia', 'finland', 'polonia', 'poland', 'grecia', 'greece',
+    'europa', 'europe'
+  ];
+
+  for (const ep of paisesEuropa) {
+    if (p === ep || p.includes(ep)) {
+      return 'europa';
+    }
+  }
+
+  return 'resto';
+}
+
+function capitalizarPais(str) {
+  if (!str) return '';
+  return str.trim().split(/\s+/).map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join(' ');
+}
+
+function actualizarPlaceholderHonorarios() {
+  const cfg = (window.SITE && window.SITE.data && window.SITE.data.config) || (window.DEFAULTS && window.DEFAULTS.config) || {};
+  const paisInput = document.getElementById('pais');
+  const pais = (paisInput ? paisInput.value : '').trim();
+  const region = detectarRegion(pais);
+
+  const inputMoneda = document.getElementById('moneda');
+  const mapaMonedas = { argentina: 'ARS', europa: 'EUR', resto: 'USD' };
+  if (inputMoneda) inputMoneda.value = mapaMonedas[region] || 'ARS';
+
+  const honorariosInput = document.getElementById('honorarios');
+  if (!honorariosInput) return;
+
+  let minAr = (cfg.tarifa_minima_ar || cfg.precio_minimo || '$30.000').trim();
+  let minEu = (cfg.tarifa_minima_eu || '40€').trim();
+  let minUsd = (cfg.tarifa_minima_usd || '25USD').trim();
+
+  // Normalizar si Sheets aplicó formato con decimales (ej: $30,000.00 -> $30.000)
+  minAr = minAr.replace(/[,.]00$/, '').replace(/,(\d{3})/g, '.$1');
+  if (/^\d/.test(minAr)) minAr = '$' + minAr;
+  minEu = minEu.replace(/[,.]00$/, '');
+  minUsd = minUsd.replace(/[,.]00$/, '');
+
+  if (!pais) {
+    honorariosInput.placeholder = `La tarifa mínima en Argentina es ${minAr} por sesión.`;
+    return;
+  }
+
+  const nombrePais = capitalizarPais(pais);
+
+  if (region === 'argentina') {
+    honorariosInput.placeholder = `La tarifa mínima en Argentina es ${minAr} por sesión.`;
+  } else if (region === 'europa') {
+    honorariosInput.placeholder = `La tarifa mínima en ${nombrePais} es de ${minEu} por sesión.`;
+  } else {
+    honorariosInput.placeholder = `La tarifa mínima en ${nombrePais} es de ${minUsd} por sesión.`;
+  }
+}
+
+// Hook de cambio de paso (disparado desde assets/shared.js)
+window.onStepChange = function(n) {
+  if (n === 3) {
+    actualizarPlaceholderHonorarios();
+  }
+};
+
+// Callback cuando sheets.js termina de cargar la config de la planilla
+window.actualizarHonorariosConfig = function() {
+  actualizarPlaceholderHonorarios();
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+  actualizarPlaceholderHonorarios();
+
+  const paisInput = document.getElementById('pais');
+  if (paisInput) {
+    paisInput.addEventListener('change', actualizarPlaceholderHonorarios);
+    paisInput.addEventListener('blur', actualizarPlaceholderHonorarios);
+    paisInput.addEventListener('input', actualizarPlaceholderHonorarios);
+  }
+});
+
 async function submitForm() {
   const btn = event?.target;
+
+  // Validar todos los pasos antes de enviar
+  for (let i = 1; i <= 3; i++) {
+    const stepEl = document.getElementById('step' + i);
+    if (stepEl) {
+      const campos = stepEl.querySelectorAll('input, select, textarea');
+      for (const campo of campos) {
+        if (!campo.checkValidity()) {
+          goStep(i);
+          campo.reportValidity();
+          campo.focus();
+          return;
+        }
+      }
+    }
+  }
+
   if (btn) { btn.disabled = true; btn.textContent = 'Enviando…'; }
 
   const datos = juntarDatos(document.querySelector('.form-body'));

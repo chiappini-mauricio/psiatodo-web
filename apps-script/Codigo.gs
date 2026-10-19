@@ -251,12 +251,13 @@ function crearEstructuraInicial() {
   var config = ss.getSheetByName('Config') || ss.insertSheet('Config');
   config.clear();
   config.getRange('A1:C1').setValues([['Clave', 'Valor', 'Dónde aparece']]);
-  config.getRange('A2:C6').setValues([
-    ['precio_minimo',      '$20.000',  'Formulario de consulta + FAQ'],
-    ['precio_texto',       'La tarifa mínima en Argentina es $20.000 por sesión.', 'FAQ - respuesta sobre aranceles'],
-    ['whatsapp',           '5491140463306', 'Botón flotante + links'],
-    ['email',              'info@psiatodo.com', 'Footer + contacto'],
-    ['tiempo_respuesta',   '24 horas hábiles', 'Varios lugares del sitio']
+  config.getRange('A2:C7').setValues([
+    ['tarifa_minima_ar',     '$30.000',  'Tarifa mínima Argentina'],
+    ['tarifa_minima_eu',     '40€',      'Tarifa mínima Europa'],
+    ['tarifa_minima_usd',    '25USD',    'Tarifa mínima Resto del mundo'],
+    ['whatsapp',             '5491140463306', 'Botón flotante + links'],
+    ['email',                'info@psiatodo.com', 'Footer + contacto'],
+    ['tiempo_respuesta',     '24 horas hábiles', 'Varios lugares del sitio']
   ]);
   config.getRange('A1:C1')
         .setFontWeight('bold')
@@ -332,12 +333,13 @@ function crearEstructuraInicial() {
   // ── Pestaña CONSULTAS ──
   var consultas = ss.getSheetByName('Consultas') || ss.insertSheet('Consultas');
   if (consultas.getLastRow() === 0) {
-    consultas.getRange('A1:N1').setValues([[
+    consultas.getRange('A1:R1').setValues([[
       'fecha', 'nombre', 'apellido', 'edad', 'telefono', 'email',
       'pais', 'nacionalidad', 'motivo', 'modalidad', 'zona',
-      'horarios', 'tratamiento', 'honorarios'
+      'horarios', 'tratamiento', 'genero_preferencia', 'edad_preferencia',
+      'honorarios', 'moneda', 'arancel_diferenciado'
     ]]);
-    consultas.getRange('A1:N1')
+    consultas.getRange('A1:R1')
              .setFontWeight('bold')
              .setBackground('#212121')
              .setFontColor('#fff7ec');

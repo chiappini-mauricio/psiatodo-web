@@ -90,6 +90,22 @@ function toggleFaq(btn) {
 
 /* ── Multi-step form ── */
 function goStep(n) {
+  const activeStep = document.querySelector('.form-step.active');
+  if (activeStep) {
+    const currentNum = parseInt(activeStep.id.replace('step', ''), 10);
+    // Si avanza a un paso siguiente, validar que los campos obligatorios del paso actual estén completos
+    if (n > currentNum) {
+      const inputs = activeStep.querySelectorAll('input, select, textarea');
+      for (const el of inputs) {
+        if (!el.checkValidity()) {
+          el.reportValidity();
+          el.focus();
+          return;
+        }
+      }
+    }
+  }
+
   document.querySelectorAll('.form-step').forEach(s => {
     s.classList.remove('active');
   });
@@ -103,6 +119,9 @@ function goStep(n) {
   }
   const formEl = document.getElementById('formulario') || document.querySelector('.form-section');
   if (formEl) setTimeout(() => formEl.scrollIntoView({ behavior: 'smooth', block: 'start' }), 80);
+  if (typeof window.onStepChange === 'function') {
+    try { window.onStepChange(n); } catch (e) { console.error(e); }
+  }
 }
 
 /* ── Testimonial slider with touch swipe ── */

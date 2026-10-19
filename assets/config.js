@@ -24,11 +24,14 @@ const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbwvUUrx_Z5VShOijnkTM
  */
 const DEFAULTS = {
   config: {
-    precio_minimo:    '',
-    precio_texto:     'Esta info nos permite orientarte hacia el profesional adecuado.',
-    whatsapp:         '5491140463306',
-    email:            'info@psiatodo.com',
-    tiempo_respuesta: '24 horas hábiles'
+    precio_minimo:        '$30.000',
+    tarifa_minima_ar:     '$30.000',
+    tarifa_minima_eu:     '40€',
+    tarifa_minima_usd:    '25USD',
+    precio_texto:         'La tarifa mínima en Argentina es $30.000 por sesión.',
+    whatsapp:             '5491140463306',
+    email:                'info@psiatodo.com',
+    tiempo_respuesta:     '24 horas hábiles'
   },
   talleres: [
     {

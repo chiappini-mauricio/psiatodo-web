@@ -158,10 +158,19 @@
 <script src="assets/sheets.js"></script>
 <script>
 async function submitContacto(btn) {
+  const cont = btn.closest('div');
+  const campos = cont.querySelectorAll('input, textarea, select');
+  for (const c of campos) {
+    if (!c.checkValidity()) {
+      c.reportValidity();
+      c.focus();
+      return;
+    }
+  }
+
   btn.disabled = true;
   btn.textContent = 'Enviando…';
 
-  const cont = btn.closest('div');
   const datos = juntarDatos(cont);
   await enviarAPlanilla('contacto', datos);
 
