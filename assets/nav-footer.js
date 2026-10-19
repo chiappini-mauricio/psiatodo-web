@@ -7,7 +7,6 @@ const NAV_HTML = `
   <a href="index.html"><img class="nav-logo" src="assets/logos/Logo_Blanco_Amarillo.png" alt="Psi a Todo"></a>
   <ul class="nav-links">
     <li><a href="index.html">Inicio</a></li>
-    <li><a href="psi-a-todo.html">Psi a Todo</a></li>
     <li><a href="quienes-somos.html">Quiénes somos</a></li>
     <li><a href="faq.html">Preguntas frecuentes</a></li>
     <li><a href="novedades.html">Novedades</a></li>
@@ -21,7 +20,6 @@ const NAV_HTML = `
 </nav>
 <div class="mob-menu" id="mobMenu" role="dialog" aria-label="Menú de navegación">
   <a href="index.html" onclick="closeMenu()">Inicio</a>
-  <a href="psi-a-todo.html" onclick="closeMenu()">Psi a Todo</a>
   <a href="quienes-somos.html" onclick="closeMenu()">Quiénes somos</a>
   <a href="faq.html" onclick="closeMenu()">Preguntas frecuentes</a>
   <a href="novedades.html" onclick="closeMenu()">Novedades</a>
@@ -51,7 +49,6 @@ const FOOTER_HTML = `
       <div class="footer-col">
         <h4>Secciones</h4>
         <a href="index.html">Inicio</a>
-        <a href="psi-a-todo.html">Psi a Todo</a>
         <a href="quienes-somos.html">Quiénes somos</a>
         <a href="faq.html">Preguntas frecuentes</a>
         <a href="novedades.html">Novedades</a>

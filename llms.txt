@@ -32,7 +32,6 @@
 - [Inicio](https://psiatodo.com/): Presentación de la red y propuesta de valor.
 - [Solicitar Consulta](https://psiatodo.com/consulta.html): Formulario para iniciar la orientación gratuita.
 - [Quiénes Somos](https://psiatodo.com/quienes-somos.html): Historia, valores y equipo orientador.
-- [Qué Hacemos](https://psiatodo.com/psi-a-todo.html): Enfoque clínico, institucional y ético.
 - [Para Profesionales](https://psiatodo.com/profesionales.html): Red de derivación y espacios clínicos para colegiados.
 - [Preguntas Frecuentes](https://psiatodo.com/faq.html): Respuestas a dudas sobre costos, modalidades y confidencialidad.
 - [Novedades](https://psiatodo.com/novedades.html): Artículos y reflexiones clínicas.
