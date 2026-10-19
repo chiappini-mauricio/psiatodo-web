@@ -309,13 +309,6 @@ function renderNota() {
     <div class="post-body">
       <article class="post-content">
         ${formatearTexto(nota.contenido || nota.descripcion || '')}
-
-        <div class="post-cta">
-          <p style="font-size:14px;color:rgba(33,33,33,.7);margin-bottom:1rem">
-            ¿Buscás iniciar un proceso terapéutico?
-          </p>
-          <a class="btn btn-red" href="consulta.html">Quiero empezar <i class="ti ti-arrow-right"></i></a>
-        </div>
       </article>
     </div>`;
 }
