@@ -14,7 +14,7 @@
  * que están más abajo en DEFAULTS.
  */
 
-const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbwvUUrx_Z5VShOijnkTM7gkYVKdZ3Ya8mRu4zEU9k4WUpR2HPYMKc82bq_N5gPTy7zFGQ/exec';   // ← PEGAR ACÁ LA URL DEL APPS SCRIPT
+const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbyATp-5zmzIuH5uTQxjQJAUi207CS0Fh3rq979txxn_vi2-wZIYKeN-fxVmfdxyHnxd8A/exec';   // ← PEGAR ACÁ LA URL DEL APPS SCRIPT
 
 
 /**
