@@ -6,9 +6,11 @@
  *
  *  1. doGet()  → Devuelve el contenido editable del sitio (precios, talleres)
  *                en formato JSON, para que la web lo lea.
+ *                Lee la planilla MAESTRA (pestañas Config y Talleres).
  *
- *  2. doPost() → Recibe las consultas del formulario y las guarda
- *                en la pestaña "Consultas".
+ *  2. doPost() → Recibe los formularios y los guarda en una planilla
+ *                SEPARADA (pestañas Consultas, Contacto y Postulaciones).
+ *                Esa planilla se crea con crearPlanillaDeRespuestas().
  *
  * ─────────────────────────────────────────────────────────────
  * CÓMO INSTALARLO (una sola vez):
@@ -154,10 +156,28 @@ function generarSlug(texto) {
 // ESCRITURA — recibe las consultas del formulario
 // ═══════════════════════════════════════════════════════════
 
+/**
+ * Devuelve la planilla donde se guardan las respuestas de los formularios
+ * (Consultas, Contacto, Postulaciones).
+ *
+ * Es una planilla SEPARADA de la maestra (que solo tiene Config y Talleres).
+ * Su ID se guarda en las "Propiedades del script" al correr
+ * crearPlanillaDeRespuestas(). Si todavía no se creó, usa la planilla
+ * maestra para que nunca se pierda una consulta.
+ */
+function getRespuestasSS() {
+  var id = PropertiesService.getScriptProperties().getProperty('RESPUESTAS_SS_ID');
+  if (id) {
+    try { return SpreadsheetApp.openById(id); } catch (err) { /* cae al fallback */ }
+  }
+  return SpreadsheetApp.getActiveSpreadsheet();
+}
+
+
 function doPost(e) {
   try {
     var datos = JSON.parse(e.postData.contents);
-    var ss = SpreadsheetApp.getActiveSpreadsheet();
+    var ss = getRespuestasSS();
 
     // Según el tipo, va a una pestaña u otra
     var tipo = datos.tipo || 'consulta';
@@ -198,8 +218,8 @@ function doPost(e) {
 
     hoja.appendRow(fila);
 
-    // Notificación por mail (opcional — descomentar y poner el mail)
-    // enviarNotificacion(datos, nombreHoja);
+    // Notificación por mail
+    enviarNotificacion(datos, nombreHoja);
 
     return ContentService
       .createTextOutput(JSON.stringify({ ok: true }))
@@ -225,7 +245,7 @@ function enviarNotificacion(datos, tipoFormulario) {
     if (clave === 'tipo') continue;
     cuerpo += clave + ': ' + datos[clave] + '\n';
   }
-  cuerpo += '\n---\nVer todas: ' + SpreadsheetApp.getActiveSpreadsheet().getUrl();
+  cuerpo += '\n---\nVer todas: ' + getRespuestasSS().getUrl();
 
   MailApp.sendEmail({
     to: destinatario,
@@ -242,7 +262,7 @@ function enviarNotificacion(datos, tipoFormulario) {
 /**
  * Ejecutá esta función UNA VEZ desde el editor de Apps Script
  * (seleccionala del desplegable y apretá ▶ Ejecutar)
- * para que arme las pestañas con sus encabezados.
+ * para que arme las pestañas Config y Talleres de la planilla maestra.
  */
 function crearEstructuraInicial() {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
@@ -330,49 +350,6 @@ function crearEstructuraInicial() {
     .build();
   talleres.getRange('C2:C200').setDataValidation(reglaCategoria);
 
-  // ── Pestaña CONSULTAS ──
-  var consultas = ss.getSheetByName('Consultas') || ss.insertSheet('Consultas');
-  if (consultas.getLastRow() === 0) {
-    consultas.getRange('A1:R1').setValues([[
-      'fecha', 'nombre', 'apellido', 'edad', 'telefono', 'email',
-      'pais', 'nacionalidad', 'motivo', 'modalidad', 'zona',
-      'horarios', 'tratamiento', 'genero_preferencia', 'edad_preferencia',
-      'honorarios', 'moneda', 'arancel_diferenciado'
-    ]]);
-    consultas.getRange('A1:R1')
-             .setFontWeight('bold')
-             .setBackground('#212121')
-             .setFontColor('#fff7ec');
-    consultas.setFrozenRows(1);
-  }
-
-  // ── Pestaña CONTACTO ──
-  var contacto = ss.getSheetByName('Contacto') || ss.insertSheet('Contacto');
-  if (contacto.getLastRow() === 0) {
-    contacto.getRange('A1:G1').setValues([[
-      'fecha', 'nombre', 'apellido', 'email', 'telefono', 'soy', 'mensaje'
-    ]]);
-    contacto.getRange('A1:G1')
-            .setFontWeight('bold')
-            .setBackground('#212121')
-            .setFontColor('#fff7ec');
-    contacto.setFrozenRows(1);
-  }
-
-  // ── Pestaña POSTULACIONES ──
-  var postul = ss.getSheetByName('Postulaciones') || ss.insertSheet('Postulaciones');
-  if (postul.getLastRow() === 0) {
-    postul.getRange('A1:I1').setValues([[
-      'fecha', 'nombre', 'apellido', 'email', 'telefono',
-      'matricula', 'enfoque', 'experiencia', 'mensaje'
-    ]]);
-    postul.getRange('A1:I1')
-          .setFontWeight('bold')
-          .setBackground('#212121')
-          .setFontColor('#fff7ec');
-    postul.setFrozenRows(1);
-  }
-
   // Sacar la hoja por defecto si quedó vacía
   var hoja1 = ss.getSheetByName('Hoja 1') || ss.getSheetByName('Sheet1');
   if (hoja1 && ss.getSheets().length > 1 && hoja1.getLastRow() === 0) {
@@ -381,12 +358,93 @@ function crearEstructuraInicial() {
 
   SpreadsheetApp.getUi().alert(
     'Listo ✓\n\n' +
-    'Se crearon las pestañas:\n' +
-    '• Config — precio mínimo y datos generales\n' +
-    '• Talleres — eventos y novedades\n' +
-    '• Consultas — formulario principal\n' +
-    '• Contacto — formulario de contacto\n' +
-    '• Postulaciones — profesionales\n\n' +
-    'Ahora implementá el script como aplicación web.'
+    'Planilla maestra con las pestañas:\n' +
+    '• Config — tarifas y datos generales\n' +
+    '• Talleres — eventos y novedades\n\n' +
+    'Las consultas, contactos y postulaciones van a otra planilla.\n' +
+    'Ejecutá ahora crearPlanillaDeRespuestas().'
+  );
+}
+
+
+/**
+ * Ejecutá esta función UNA VEZ (▶ Ejecutar) para separar las respuestas.
+ *
+ *  1. Crea una planilla nueva "Psi a Todo — Respuestas" con las pestañas
+ *     Consultas, Contacto y Postulaciones.
+ *  2. Copia ahí lo que ya hubiera en esas pestañas de la maestra.
+ *  3. Guarda el ID de la planilla nueva para que doPost() escriba ahí.
+ *
+ * No borra nada de la maestra: cuando verifiques que todo quedó bien en la
+ * planilla nueva, podés eliminar a mano las pestañas viejas de la maestra.
+ * Si ya la ejecutaste antes, reutiliza la planilla existente (no duplica).
+ */
+function crearPlanillaDeRespuestas() {
+  var props = PropertiesService.getScriptProperties();
+  var maestra = SpreadsheetApp.getActiveSpreadsheet();
+  var destino = null;
+
+  var idGuardado = props.getProperty('RESPUESTAS_SS_ID');
+  if (idGuardado) {
+    try { destino = SpreadsheetApp.openById(idGuardado); } catch (err) { destino = null; }
+  }
+  if (!destino) {
+    destino = SpreadsheetApp.create('Psi a Todo — Respuestas');
+    props.setProperty('RESPUESTAS_SS_ID', destino.getId());
+  }
+
+  var definiciones = {
+    'Consultas': [
+      'fecha', 'nombre', 'apellido', 'edad', 'telefono', 'email',
+      'pais', 'nacionalidad', 'motivo', 'modalidad', 'zona',
+      'horarios', 'tratamiento', 'genero_preferencia', 'edad_preferencia',
+      'honorarios', 'moneda', 'arancel_diferenciado'
+    ],
+    'Contacto': ['fecha', 'nombre', 'apellido', 'email', 'telefono', 'soy', 'mensaje'],
+    'Postulaciones': [
+      'fecha', 'nombre', 'apellido', 'email', 'telefono',
+      'matricula', 'enfoque', 'experiencia', 'mensaje'
+    ]
+  };
+
+  var migradas = [];
+
+  Object.keys(definiciones).forEach(function(nombre) {
+    var hojaDestino = destino.getSheetByName(nombre);
+    var origen = maestra.getSheetByName(nombre);
+    var origenTieneDatos = origen && origen.getLastRow() > 0;
+
+    if (!hojaDestino) {
+      if (origenTieneDatos) {
+        // Copiar la pestaña tal cual (datos, formato y encabezados reales)
+        hojaDestino = origen.copyTo(destino);
+        hojaDestino.setName(nombre);
+        migradas.push(nombre + ' (' + Math.max(origen.getLastRow() - 1, 0) + ' filas)');
+      } else {
+        hojaDestino = destino.insertSheet(nombre);
+        var claves = definiciones[nombre];
+        hojaDestino.getRange(1, 1, 1, claves.length).setValues([claves])
+                   .setFontWeight('bold')
+                   .setBackground('#212121')
+                   .setFontColor('#fff7ec');
+        hojaDestino.setFrozenRows(1);
+      }
+    }
+  });
+
+  // Sacar la hoja por defecto de la planilla nueva
+  var porDefecto = destino.getSheetByName('Hoja 1') || destino.getSheetByName('Sheet1');
+  if (porDefecto && destino.getSheets().length > 1) {
+    destino.deleteSheet(porDefecto);
+  }
+
+  Logger.log('Planilla de respuestas: ' + destino.getUrl());
+  SpreadsheetApp.getUi().alert(
+    'Listo ✓\n\n' +
+    'Planilla de respuestas:\n' + destino.getUrl() + '\n\n' +
+    (migradas.length ? 'Se copiaron desde la maestra: ' + migradas.join(', ') + '.\n\n' : '') +
+    'Desde ahora, consultas, contactos y postulaciones se guardan ahí.\n' +
+    'Recordá crear una NUEVA VERSIÓN de la implementación (Implementar → ' +
+    'Administrar implementaciones → editar → Nueva versión).'
   );
 }
