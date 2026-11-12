@@ -263,7 +263,9 @@ function capitalizarPais(str) {
 }
 
 function actualizarPlaceholderHonorarios() {
-  const cfg = (window.SITE && window.SITE.data && window.SITE.data.config) || (window.DEFAULTS && window.DEFAULTS.config) || {};
+  const cfg = (typeof SITE !== 'undefined' && SITE.data && SITE.data.config)
+           || (typeof DEFAULTS !== 'undefined' && DEFAULTS.config)
+           || {};
   const paisInput = document.getElementById('pais');
   const pais = (paisInput ? paisInput.value : '').trim();
   const region = detectarRegion(pais);
@@ -279,6 +281,11 @@ function actualizarPlaceholderHonorarios() {
   let minEu = String(cfg.tarifa_minima_eu || '35€').trim();
   let minUsd = String(cfg.tarifa_minima_usd || '25USD').trim();
 
+  // Quitar decimales finales para que ej. "$45,000.00" no se convierta en 4500000
+  minAr = minAr.replace(/[.,]\d{1,2}$/, '');
+  minEu = minEu.replace(/[.,]\d{1,2}$/, '');
+  minUsd = minUsd.replace(/[.,]\d{1,2}$/, '');
+
   // Formato Argentina: ej. 30000 -> $30.000
   const numAr = parseInt(minAr.replace(/[^\d]/g, ''), 10);
   if (!isNaN(numAr) && numAr > 0) {
@@ -288,7 +295,6 @@ function actualizarPlaceholderHonorarios() {
   }
 
   // Formato Europa: ej. 35 -> 35€
-  minEu = minEu.replace(/[,.]00$/, '');
   if (/^\d+$/.test(minEu)) {
     minEu = minEu + '€';
   } else if (!minEu.includes('€') && !/eur/i.test(minEu)) {
@@ -296,7 +302,6 @@ function actualizarPlaceholderHonorarios() {
   }
 
   // Formato Resto del mundo: ej. 25 -> 25USD
-  minUsd = minUsd.replace(/[,.]00$/, '');
   if (/^\d+$/.test(minUsd)) {
     minUsd = minUsd + 'USD';
   } else if (!/usd/i.test(minUsd) && !minUsd.startsWith('$')) {
