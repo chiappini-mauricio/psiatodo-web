@@ -636,7 +636,8 @@ blockquote.testimonial strong { color:var(--yellow); font-style:normal; font-wei
   transition: transform .35s ease, border-color .35s ease, box-shadow .35s ease;
 }
 .team-card:hover { transform: translateY(-6px); border-color: rgba(237,189,53,0.35); box-shadow: 0 16px 36px rgba(0,0,0,0.3); }
-.team-photo { width:100%; aspect-ratio:3/4; object-fit:cover; filter:grayscale(100%); display:block; background:#333; border-radius: 12px; }
+.team-photo { width:100%; aspect-ratio:3/4; object-fit:cover; display:block; background:#333; border-radius: 12px; box-shadow: 0 4px 16px rgba(0,0,0,0.08); transition: transform .3s ease, box-shadow .3s ease; }
+.team-photo:hover { transform: translateY(-4px); box-shadow: 0 10px 24px rgba(0,0,0,0.14); }
 .team-photo-placeholder { width:100%; aspect-ratio:3/4; background: linear-gradient(135deg, #1c1e28 0%, #2a2d3d 50%, #1c1e28 100%); border-radius: 12px; display:flex; align-items:center; justify-content:center; }
 .team-photo-placeholder span { font-size:10px; letter-spacing:.15em; text-transform:uppercase; color:rgba(255,247,236,.3); }
 .team-info { padding:1.25rem 0 .5rem; }
