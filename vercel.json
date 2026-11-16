@@ -10,5 +10,11 @@
       "destination": "/quienes-somos.html",
       "permanent": true
     }
+  ],
+  "rewrites": [
+    {
+      "source": "/gracias",
+      "destination": "/gracias.html"
+    }
   ]
 }

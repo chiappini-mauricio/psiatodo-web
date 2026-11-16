@@ -380,8 +380,16 @@ async function submitForm() {
   if (btn) { btn.disabled = true; btn.textContent = 'Enviando…'; }
 
   const datos = juntarDatos(document.querySelector('.form-body'));
-  await enviarAPlanilla('consulta', datos);
+  const res = await enviarAPlanilla('consulta', datos);
 
+  // Si se envió bien, ir a /gracias (Meta mide la conversión con esa URL).
+  // La pausa corta deja que GTM procese el evento form_submit antes de salir.
+  if (res && res.ok) {
+    setTimeout(() => { window.location.href = '/gracias'; }, 400);
+    return;
+  }
+
+  // Si falló, mostrar el mensaje en la misma página como antes
   document.querySelectorAll('.form-step').forEach(s => s.style.display = 'none');
   const prog = document.querySelector('.prog');
   if (prog) prog.style.display = 'none';
