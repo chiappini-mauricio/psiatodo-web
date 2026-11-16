@@ -5,7 +5,7 @@
 ## Información General
 
 - **Nombre:** Psi a Todo
-- **Sitio Web:** https://psiatodo.com/
+- **Sitio Web:** https://www.psiatodo.com/
 - **Especialidad:** Orientación psicológica, derivación clínica a psicólogos matriculados, tratamiento del padecimiento subjetivo, psicoanálisis e interdisciplina.
 - **Modalidad:** Atención presencial (Argentina) y atención online (global).
 - **Costo de Orientación Inicial:** 100% Gratuita y sin compromiso de continuidad.
@@ -16,23 +16,23 @@
 - Entrevista inicial de escucha y evaluación del caso sin costo.
 - Asignación de profesional matriculado según motivo de consulta, ubicación, modalidad y posibilidades del consultante.
 - Seguimiento ético y cuidado del inicio del tratamiento.
-- Formulario de solicitud: https://psiatodo.com/consulta.html
+- Formulario de solicitud: https://www.psiatodo.com/consulta.html
 
 ### 2. Red de Profesionales de la Salud Mental
 - Integración de psicólogos y psicoanalistas graduados y matriculados.
 - Espacios de formación continua, ateneos clínicos y supervisión de casos.
-- Propuesta para profesionales: https://psiatodo.com/profesionales.html
+- Propuesta para profesionales: https://www.psiatodo.com/profesionales.html
 
 ### 3. Contenidos y Publicaciones
 - Reflexiones y artículos de divulgación clínica sobre salud mental, subjetividad y práctica profesional.
-- Lecturas y novedades: https://psiatodo.com/novedades.html
+- Lecturas y novedades: https://www.psiatodo.com/novedades.html
 
 ## Páginas Canónicas del Sitio
 
-- [Inicio](https://psiatodo.com/): Presentación de la red y propuesta de valor.
-- [Solicitar Consulta](https://psiatodo.com/consulta.html): Formulario para iniciar la orientación gratuita.
-- [Quiénes Somos](https://psiatodo.com/quienes-somos.html): Historia, valores y equipo orientador.
-- [Para Profesionales](https://psiatodo.com/profesionales.html): Red de derivación y espacios clínicos para colegiados.
-- [Preguntas Frecuentes](https://psiatodo.com/faq.html): Respuestas a dudas sobre costos, modalidades y confidencialidad.
-- [Novedades](https://psiatodo.com/novedades.html): Artículos y reflexiones clínicas.
-- [Contacto](https://psiatodo.com/contacto.html): Canales directos de comunicación.
+- [Inicio](https://www.psiatodo.com/): Presentación de la red y propuesta de valor.
+- [Solicitar Consulta](https://www.psiatodo.com/consulta.html): Formulario para iniciar la orientación gratuita.
+- [Quiénes Somos](https://www.psiatodo.com/quienes-somos.html): Historia, valores y equipo orientador.
+- [Para Profesionales](https://www.psiatodo.com/profesionales.html): Red de derivación y espacios clínicos para colegiados.
+- [Preguntas Frecuentes](https://www.psiatodo.com/faq.html): Respuestas a dudas sobre costos, modalidades y confidencialidad.
+- [Novedades](https://www.psiatodo.com/novedades.html): Artículos y reflexiones clínicas.
+- [Contacto](https://www.psiatodo.com/contacto.html): Canales directos de comunicación.

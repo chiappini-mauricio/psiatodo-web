@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://psiatodo.com/sitemap.xml
+Sitemap: https://www.psiatodo.com/sitemap.xml
