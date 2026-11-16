@@ -238,20 +238,32 @@ function doPost(e) {
  * Para activarlo: descomentar la llamada en doPost() y poner el mail.
  */
 function enviarNotificacion(datos, tipoFormulario) {
-  var destinatario = 'info@psiatodo.com';  // ← CAMBIAR
+  var destinatario = 'info@psiatodo.com';
 
-  var cuerpo = 'Llegó una nueva ' + tipoFormulario + ':\n\n';
+  var etiquetas = {
+    'Consultas':     'Nueva consulta',
+    'Contacto':      'Nuevo contacto',
+    'Postulaciones': 'Nueva postulación'
+  };
+  var titulo = etiquetas[tipoFormulario] || ('Nuevo formulario: ' + tipoFormulario);
+  var persona = [datos.nombre, datos.apellido].filter(Boolean).join(' ');
+
+  var cuerpo = titulo + (persona ? ' de ' + persona : '') + ':\n\n';
   for (var clave in datos) {
     if (clave === 'tipo') continue;
     cuerpo += clave + ': ' + datos[clave] + '\n';
   }
   cuerpo += '\n---\nVer todas: ' + getRespuestasSS().getUrl();
 
-  MailApp.sendEmail({
+  var opciones = {
     to: destinatario,
-    subject: 'Psi a Todo — Nueva ' + tipoFormulario.toLowerCase(),
-    body: cuerpo
-  });
+    subject: titulo + (persona ? ' — ' + persona : ''),
+    body: cuerpo,
+    name: 'Psi a Todo'
+  };
+  if (datos.email) opciones.replyTo = datos.email;
+
+  MailApp.sendEmail(opciones);
 }
 
 
