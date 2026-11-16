@@ -407,6 +407,11 @@ async function enviarAPlanilla(tipo, datos) {
       headers: { 'Content-Type': 'text/plain;charset=utf-8' },
       body: JSON.stringify({ ...datos, tipo })   // tipo va último: ningún campo puede pisarlo
     });
+
+    // Evento para Google Tag Manager (solo el tipo, nunca datos personales)
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ event: 'form_submit', form_type: tipo });
+
     // Con no-cors no se puede leer la respuesta, asumimos éxito
     return { ok: true };
   } catch (err) {
